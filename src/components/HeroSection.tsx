@@ -12,7 +12,7 @@ const HeroSection = () => {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] text-primary text-xs font-mono mb-8"
+                    className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-primary text-xs font-mono tracking-wide mb-8 shadow-sm"
                 >
                     <Shield className="w-3 h-3" />
                     CYBERSECURITY ENGINEER
@@ -24,7 +24,8 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.1 }}
                     className="text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
                 >
-                    Abdelhadi Rizki<span className="text-primary">.</span>
+                    Abdelhadi <span className="gradient-text">Rizki</span>
+                    <span className="text-primary">.</span>
                 </motion.h1>
 
                 <motion.div
@@ -33,7 +34,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="group"
                 >
-                    <p className="font-mono text-sm sm:text-base md:text-lg text-muted-foreground/90 mb-5 inline-flex items-center justify-center min-w-[280px] md:min-w-[340px] px-4 py-1.5 md:py-1 rounded-full bg-white/[0.02] border border-white/8 whitespace-nowrap">
+                    <p className="surface font-mono text-sm sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center min-w-[280px] md:min-w-[340px] px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
                         <TypingText texts={[
                             "Security Researcher",
                             "Junior Penetration Tester",
@@ -63,10 +64,10 @@ const HeroSection = () => {
                 >
                     <a
                         href="#cv"
-                        className="inline-flex items-center justify-center w-full sm:w-auto gap-2 rounded-[16px] border border-primary/25 bg-primary/[0.08] px-8 py-3 text-sm font-medium text-primary transition-all hover:bg-primary/[0.12] hover:border-primary/40"
+                        className="group inline-flex items-center justify-center w-full sm:w-auto gap-2 rounded-2xl bg-primary px-8 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-8px_hsl(var(--primary)/0.7)]"
                     >
                         <span>View Resume</span>
-                        <ArrowDown className="w-4 h-4" />
+                        <ArrowDown className="w-4 h-4 transition-transform duration-300 group-hover:translate-y-0.5" />
                     </a>
                     <div className="flex items-center justify-center gap-3">
                         {[
@@ -80,9 +81,9 @@ const HeroSection = () => {
                                 href={social.href}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="p-3 rounded-[16px] border border-white/10 bg-white/[0.03] hover:border-primary/30 hover:bg-white/[0.06] transition-all group"
+                                className="surface surface-hover p-3 rounded-2xl group"
                             >
-                                <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                                <social.icon className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                             </a>
                         ))}
                     </div>
@@ -96,7 +97,7 @@ const HeroSection = () => {
                 className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/50"
             >
                 <span className="text-[10px] font-mono tracking-widest uppercase">Scroll to initiate</span>
-                <div className="w-6 h-10 rounded-full border border-white/10 flex items-start justify-center p-2">
+                <div className="w-6 h-10 rounded-full border border-primary/25 flex items-start justify-center p-2">
                     <motion.div
                         animate={{ y: [0, 12, 0] }}
                         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
