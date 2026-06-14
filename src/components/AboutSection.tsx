@@ -21,14 +21,16 @@ const AboutSection = () => {
 
           <p className="mt-8 text-lg md:text-xl leading-relaxed text-muted-foreground">
             I'm <span className="text-foreground font-medium">Abdelhadi Rizki</span>, a
-            cybersecurity engineer and ethical hacker based in Marrakech, Morocco. I'm passionate
-            about protecting the digital world through security research, secure engineering, and
-            hands-on projects — and I love breaking systems to understand how to defend them better.
+            cybersecurity engineer based in Marrakech, Morocco, focused on
+            <span className="text-foreground font-medium"> defensive security</span> — threat
+            detection, SOC operations, and SIEM. My offensive background helps me understand how
+            attackers think, so I can defend smarter.
           </p>
 
           <p className="mt-6 text-base md:text-lg leading-relaxed text-muted-foreground/80">
-            My focus is on ethical hacking, threat analysis, and AI integration — building
-            intelligent tools to anticipate, detect, and stop modern cyber attacks.
+            What sets me apart is <span className="text-foreground font-medium">AI applied to
+            cybersecurity</span> — building intelligent tools that detect anomalies, analyze threats,
+            and respond to modern attacks faster than traditional approaches.
           </p>
         </motion.div>
       </div>
