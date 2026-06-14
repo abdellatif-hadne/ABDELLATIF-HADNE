@@ -1,4 +1,5 @@
 import Navbar from "../components/Navbar";
+import Reveal from "../components/Reveal";
 import HeroSection from "../components/HeroSection";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
@@ -20,14 +21,14 @@ const HomePage = () => {
 
             <main className="relative z-10">
                 <HeroSection />
-                <AboutSection />
-                <SkillsSection />
-                <ExperienceSection />
-                <EducationSection />
-                <ProjectsSection />
-                <CVSection />
-                <CertsSection />
-                <ContactSection />
+                <Reveal><AboutSection /></Reveal>
+                <Reveal><SkillsSection /></Reveal>
+                <Reveal><ExperienceSection /></Reveal>
+                <Reveal><EducationSection /></Reveal>
+                <Reveal><ProjectsSection /></Reveal>
+                <Reveal><CVSection /></Reveal>
+                <Reveal><CertsSection /></Reveal>
+                <Reveal><ContactSection /></Reveal>
             </main>
 
             {/* <footer className="py-10 text-center text-muted-foreground text-xs font-mono relative z-10 border-t border-border/50">
