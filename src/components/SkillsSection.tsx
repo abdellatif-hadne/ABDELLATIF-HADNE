@@ -215,7 +215,7 @@ const SkillsSection = () => {
             Tools I <span className="gradient-text">build &amp; break</span> with
           </h2>
           <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
-            From blue-team operations and SIEM to AI-driven security — with hands-on offensive depth.
+            Across offensive and defensive security, with a focus on AI-driven security.
           </p>
         </motion.div>
 
