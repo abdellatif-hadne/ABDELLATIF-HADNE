@@ -36,10 +36,11 @@ const HeroSection = () => {
                 >
                     <p className="surface font-mono text-sm sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center min-w-[280px] md:min-w-[340px] px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
                         <TypingText texts={[
+                            "Blue Team / SOC Analyst",
+                            "AI for Cybersecurity",
+                            "Threat Detection Engineer",
                             "Security Researcher",
-                            "Junior Penetration Tester",
-                            "CTF Player",
-                            "Ethical Hacker"
+                            "Penetration Tester"
                         ]} />
                     </p>
                 </motion.div>
@@ -53,7 +54,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
                 >
-                    Building a strong cybersecurity profile through security research, secure engineering, and practical projects focused on innovation, resilience, and continuous learning.
+                    Defensive-focused cybersecurity engineer specializing in threat detection, SOC operations, and AI applied to security — backed by hands-on offensive experience to defend smarter.
                 </motion.p>
 
                 <motion.div
