@@ -5,19 +5,17 @@ interface Achievement {
     title: string;
     description: string;
     icon: typeof Trophy;
-    color: string;
-    bg: string;
     url?: string;
     linkLabel?: string;
 }
 
-const issuerStyles: Record<string, { color: string; bg: string; label: string }> = {
-    "TryHackMe": { color: "#ff4d6d", bg: "#ff4d6d18", label: "THM" },
-    "SOCRadar": { color: "#f4a261", bg: "#f4a26118", label: "SOC" },
-    "Proofpoint": { color: "#4cc9f0", bg: "#4cc9f018", label: "PP" },
-    "Cisco": { color: "#4cc9f0", bg: "#4cc9f018", label: "CSC" },
-    "Cybrary": { color: "#a78bfa", bg: "#a78bfa18", label: "CBR" },
-    "Cisco Networking Academy": { color: "#4cc9f0", bg: "#4cc9f018", label: "CSC" },
+const issuerLabels: Record<string, string> = {
+    "TryHackMe": "THM",
+    "SOCRadar": "SOC",
+    "Proofpoint": "PP",
+    "Cisco": "CSC",
+    "Cybrary": "CBR",
+    "Cisco Networking Academy": "CSC",
 };
 
 const certifications = [
@@ -36,11 +34,9 @@ const certifications = [
 
 const achievements: Achievement[] = [
     {
-        title: "🏆 1st Prize IT – SKILLUP26",
+        title: "1st Prize IT – SKILLUP26",
         description: "Won the 1st IT Prize at the final competition of the 8th Summer School in Aeronautics (SKILLUP26) in Marrakech — after months of intensive mentoring, workshops and coaching with international experts.",
         icon: Trophy,
-        color: "#FFD700",
-        bg: "#FFD70018",
         url: "https://www.linkedin.com/posts/abdelhadi-rizki_skillup26-skillup26-skillup26-activity-7464357418823688193-ON_S",
         linkLabel: "View LinkedIn post",
     },
@@ -48,38 +44,28 @@ const achievements: Achievement[] = [
         title: "Security Research Recognition – SEM",
         description: "Formal recognition letter from SEM for identifying and responsibly reporting a potential vulnerability, helping safeguard their digital integrity and data-protection compliance.",
         icon: ShieldCheck,
-        color: "#4826F3",
-        bg: "#4826F318",
-        url: "REPLACE_WITH_YOUR_DRIVE_LINK",
+        url: "https://drive.google.com/file/d/1ybWxA-a3p5zyR32cv_yMh001xlIoAGkk/view?usp=drive_link",
         linkLabel: "View recognition letter",
     },
     {
         title: "1st Place Gold League",
         description: "Top 6% worldwide on TryHackMe",
         icon: Trophy,
-        color: "#f4a261",
-        bg: "#f4a26118",
     },
     {
         title: "Natas CTF Complete",
         description: "All 33 levels completed on OverTheWire",
         icon: Flag,
-        color: "#00ff88",
-        bg: "#00ff8818",
     },
     {
         title: "Top 10 – Knights of the Fury CTF",
         description: "8ème place sur 100 équipes avec S4M_Hack – 24h de challenges intensifs en cybersécurité (Web, Crypto, OSINT, Reverse, IoT…).",
         icon: Trophy,
-        color: "#FFD700",
-        bg: "#FFD70018",
     },
     {
         title: "Official CTF Player – SOC4M",
         description: "Active CTF player officially representing team SOC4M, participating in cybersecurity competitions and solving challenges across multiple domains.",
         icon: Flag,
-        color: "#00c2ff",
-        bg: "#00c2ff18",
     }
 ];
 
@@ -93,18 +79,23 @@ const CertsSection = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <div className="text-center mb-12">
-                        <h2 className="font-mono text-3xl md:text-4xl font-bold text-foreground mb-2">
-                            <span className="text-primary">~/</span>Certifications
-                            <span className="text-[#a78bfa]"></span>
+                    <div className="text-center mb-14">
+                        <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                            CERTIFICATIONS
+                        </span>
+                        <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                            Licenses &amp; <span className="gradient-text">achievements</span>
                         </h2>
-                        <div className="w-16 h-0.5 bg-primary/50 mx-auto mt-4" />
+                        <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
+                            Certifications, competitions, and recognitions across security &amp; AI.
+                        </p>
                     </div>
 
                     {/* Cert Cards Grid */}
                     <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 mb-12">
                         {certifications.map((cert, i) => {
-                            const s = issuerStyles[cert.issuer] ?? { color: "#888", bg: "#88888818", label: "?" };
+                            const label = issuerLabels[cert.issuer] ?? "?";
                             return (
                                 <motion.a
                                     key={cert.title}
@@ -115,15 +106,12 @@ const CertsSection = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: i * 0.05 }}
-                                    className="group relative flex flex-col rounded-xl border border-border bg-card/70 p-4 no-underline backdrop-blur-sm transition-all duration-200 cursor-pointer hover:border-primary/40 hover:bg-primary/5 dark:border-[#1e1e35] dark:bg-[#0d0d18] dark:hover:border-primary/35 dark:hover:bg-[#0d1a10]"
+                                    className="group relative flex flex-col rounded-xl border border-border bg-card p-4 no-underline transition-all duration-300 cursor-pointer hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-[0_10px_24px_-14px_hsl(var(--primary)/0.4)]"
                                 >
                                     {/* Top row: issuer badge + external icon */}
                                     <div className="flex items-start justify-between gap-2 mb-3">
-                                        <span
-                                            className="text-[10px] font-bold tracking-wider px-2 py-0.5 rounded"
-                                            style={{ background: s.bg, color: s.color }}
-                                        >
-                                            {s.label}
+                                        <span className="text-[10px] font-bold tracking-wider px-2 py-0.5 rounded bg-primary/10 text-primary">
+                                            {label}
                                         </span>
                                         <ExternalLink className="mt-0.5 h-3 w-3 flex-shrink-0 text-primary opacity-0 transition-opacity group-hover:opacity-100" />
                                     </div>
@@ -143,8 +131,8 @@ const CertsSection = () => {
                     </div>
 
                     {/* Achievements */}
-                    <h3 className="mb-5 font-mono text-base font-bold text-violet-600 dark:text-[#a78bfa]">
-                        # achievements
+                    <h3 className="mb-5 font-mono text-base font-bold text-foreground">
+                        <span className="text-primary">#</span> achievements
                     </h3>
                     <div className="grid md:grid-cols-2 gap-4 items-stretch">
                         {achievements.map((ach, i) => {
