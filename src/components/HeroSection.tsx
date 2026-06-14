@@ -15,14 +15,14 @@ const HeroSection = () => {
                     className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-primary text-xs font-mono tracking-wide mb-8 shadow-sm"
                 >
                     <Shield className="w-3 h-3" />
-                    CYBERSECURITY ENGINEER
+                    CYBERSECURITY ENGINEERING STUDENT
                 </motion.div>
 
                 <motion.h1
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
+                    className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
                 >
                     Abdelhadi <span className="gradient-text">Rizki</span>
                     <span className="text-primary">.</span>
@@ -34,7 +34,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.2 }}
                     className="group"
                 >
-                    <p className="surface font-mono text-sm sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center min-w-[280px] md:min-w-[340px] px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
+                    <p className="surface font-mono text-xs sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center max-w-full min-w-[240px] sm:min-w-[280px] md:min-w-[340px] px-4 sm:px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
                         <TypingText texts={[
                             "Blue Team / SOC Analyst",
                             "AI for Cybersecurity",
@@ -54,8 +54,9 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
                 >
-                    Defensive-focused cybersecurity engineer specializing in threat detection, SOC operations, and AI applied to security — backed by hands-on offensive experience to defend smarter.
+                    Cybersecurity engineering student across offensive &amp; defensive security — from penetration testing to threat detection and SOC — with a focus on AI applied to security.
                 </motion.p>
+
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
