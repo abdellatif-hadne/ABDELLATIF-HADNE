@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { motion } from "framer-motion";
 
 interface Skill {
@@ -106,7 +105,7 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
     const parent = target.parentElement;
     if (parent) {
       const span = document.createElement("span");
-      span.style.cssText = "font-size:11px;color:#666;text-align:center;";
+      span.style.cssText = "font-size:12px;color:#94a3b8;font-weight:600;text-align:center;";
       span.textContent = skill.label.slice(0, 2).toUpperCase();
       parent.appendChild(span);
     }
@@ -118,27 +117,21 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
       target="_blank"
       rel="noopener noreferrer"
       title={skill.label}
-      className="group flex flex-col items-center gap-2 cursor-pointer no-underline flex-shrink-0"
+      className="group flex flex-col items-center gap-2.5 cursor-pointer no-underline flex-shrink-0"
     >
-      <div
-        className="w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-200 group-hover:scale-110 group-hover:brightness-125"
-        style={{
-          background: "linear-gradient(145deg, #1a1f2e, #0f1219)",
-          border: "1px solid rgba(255,255,255,0.07)",
-          boxShadow: "0 4px 15px rgba(0,0,0,0.4)",
-        }}
-      >
+      <div className="skill-tile w-16 h-16 rounded-2xl flex items-center justify-center">
         <img
           src={skill.iconUrl}
           alt={skill.label}
           width={34}
           height={34}
-          className="transition-all duration-200"
+          loading="lazy"
+          className="transition-transform duration-300 group-hover:scale-110"
           onError={handleError}
         />
       </div>
       <span
-        className="text-[11px] text-neutral-500 group-hover:text-neutral-300 transition-colors text-center leading-tight max-w-[72px]"
+        className="text-[11px] text-muted-foreground group-hover:text-primary transition-colors text-center leading-tight max-w-[72px]"
         style={{ fontFamily: "'JetBrains Mono', monospace" }}
       >
         {skill.label}
@@ -150,92 +143,87 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
 const InfiniteCarousel = ({
   skills,
   direction = "left",
-  speed = 30,
+  speed = 40,
 }: {
   skills: Skill[];
   direction?: "left" | "right";
   speed?: number;
 }) => {
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  // Triplicate items so the loop is always seamless
-  const items = [...skills, ...skills, ...skills];
-
-  // Each item: 64px icon + 24px gap = 88px
-  const itemWidth = 88;
-  const singleSetWidth = skills.length * itemWidth;
-
-  const animProps =
-    direction === "left"
-      ? { x: [0, -singleSetWidth] }
-      : { x: [-singleSetWidth, 0] };
+  // Two identical halves → translateX(-50%) loops seamlessly.
+  const half = (key: string) => (
+    <div className="flex gap-6 pr-6 shrink-0" aria-hidden={key === "b"}>
+      {skills.map((skill, i) => (
+        <SkillIcon key={`${key}-${skill.label}-${i}`} skill={skill} />
+      ))}
+    </div>
+  );
 
   return (
     <div
-      className="relative overflow-hidden w-full py-1"
+      className="relative overflow-hidden w-full py-2"
       style={{
         maskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
         WebkitMaskImage:
-          "linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%)",
+          "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
       }}
     >
-      <motion.div
-        ref={trackRef}
-        className="flex gap-6 w-max"
-        animate={animProps}
-        transition={{
-          duration: speed,
-          ease: "linear",
-          repeat: Infinity,
-          repeatType: "loop",
-        }}
-        style={{ willChange: "transform" }}
+      <div
+        className="marquee"
+        style={
+          {
+            "--marquee-duration": `${speed}s`,
+            "--marquee-direction": direction === "right" ? "reverse" : "normal",
+          } as React.CSSProperties
+        }
       >
-        {items.map((skill, i) => (
-          <SkillIcon key={`${skill.label}-${i}`} skill={skill} />
-        ))}
-      </motion.div>
+        {half("a")}
+        {half("b")}
+      </div>
     </div>
   );
 };
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-16 md:py-24">
-      <div className="container mx-auto px-6">
+    <section id="skills" className="py-20 md:py-28">
+      <div className="container mx-auto px-6 max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <h2 className="text-4xl font-bold text-foreground mb-3">
-            Skills <span className="text-primary">&</span> Expertise
-            <span className="text-[#a78bfa]">.</span>
+          <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            SKILLS &amp; EXPERTISE
+          </span>
+          <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+            Tools I <span className="gradient-text">build &amp; break</span> with
           </h2>
-          <p className="text-muted-foreground text-sm">
-            A collection of technologies I&apos;m proficient with, from offensive security to AI
+          <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
+            A collection of technologies I&apos;m proficient with — from offensive security to AI.
           </p>
         </motion.div>
 
-        <div className="space-y-12">
+        <div className="space-y-10 md:space-y-12">
           {skillCategories.map((cat, i) => (
             <motion.div
               key={cat.name}
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
             >
               {/* Category header */}
-              <div
-                className="flex items-center gap-3 mb-5 pb-2 border-b border-neutral-800"
-                style={{ fontFamily: "'JetBrains Mono', monospace" }}
-              >
-                <span className="text-xs text-primary/60">{cat.prefix}</span>
-                <span className="text-xs text-neutral-600 ml-auto">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
+                <h3 className="text-base md:text-lg font-semibold text-foreground">
+                  {cat.name}
+                </h3>
+                <div className="flex-1 h-px bg-gradient-to-r from-border to-transparent" />
+                <span className="surface text-[11px] font-mono text-muted-foreground px-2.5 py-1 rounded-full">
                   {cat.skills.length} tools
                 </span>
               </div>
@@ -244,7 +232,7 @@ const SkillsSection = () => {
               <InfiniteCarousel
                 skills={cat.skills}
                 direction={cat.direction ?? "left"}
-                speed={cat.skills.length * 2.8}
+                speed={Math.max(28, cat.skills.length * 2.6)}
               />
             </motion.div>
           ))}
