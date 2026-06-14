@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { Trophy, Flag, ExternalLink } from "lucide-react";
+import { Trophy, Flag, ExternalLink, ShieldCheck } from "lucide-react";
+
+interface Achievement {
+    title: string;
+    description: string;
+    icon: typeof Trophy;
+    color: string;
+    bg: string;
+    url?: string;
+    linkLabel?: string;
+}
 
 const issuerStyles: Record<string, { color: string; bg: string; label: string }> = {
     "TryHackMe": { color: "#ff4d6d", bg: "#ff4d6d18", label: "THM" },
@@ -24,7 +34,25 @@ const certifications = [
     { title: "Introduction to Cyber Security", issuer: "TryHackMe", date: "Nov 2024", url: "" },
 ];
 
-const achievements = [
+const achievements: Achievement[] = [
+    {
+        title: "🏆 1st Prize IT – SKILLUP26",
+        description: "Won the 1st IT Prize at the final competition of the 8th Summer School in Aeronautics (SKILLUP26) in Marrakech — after months of intensive mentoring, workshops and coaching with international experts.",
+        icon: Trophy,
+        color: "#FFD700",
+        bg: "#FFD70018",
+        url: "https://www.linkedin.com/posts/abdelhadi-rizki_skillup26-skillup26-skillup26-activity-7464357418823688193-ON_S",
+        linkLabel: "View LinkedIn post",
+    },
+    {
+        title: "Security Research Recognition – SEM",
+        description: "Formal recognition letter from SEM for identifying and responsibly reporting a potential vulnerability, helping safeguard their digital integrity and data-protection compliance.",
+        icon: ShieldCheck,
+        color: "#4826F3",
+        bg: "#4826F318",
+        url: "REPLACE_WITH_YOUR_DRIVE_LINK",
+        linkLabel: "View recognition letter",
+    },
     {
         title: "1st Place Gold League",
         description: "Top 6% worldwide on TryHackMe",
@@ -118,31 +146,42 @@ const CertsSection = () => {
                     <h3 className="mb-5 font-mono text-base font-bold text-violet-600 dark:text-[#a78bfa]">
                         # achievements
                     </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                        {achievements.map((ach, i) => (
-                            <motion.div
-                                key={ach.title}
-                                initial={{ opacity: 0, x: 20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: i * 0.1 }}
-                                className="flex items-start gap-4 rounded-xl border border-border bg-card/70 p-4 backdrop-blur-sm dark:bg-[#0d0a18]"
-                                style={{ borderColor: `${ach.color}35` }}
-                            >
-                                <div
-                                    className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border"
-                                    style={{ background: ach.bg, borderColor: `${ach.color}45` }}
+                    <div className="grid md:grid-cols-2 gap-4 items-stretch">
+                        {achievements.map((ach, i) => {
+                            const hasLink = !!ach.url && ach.url !== "REPLACE_WITH_YOUR_DRIVE_LINK";
+                            const Comp: React.ElementType = hasLink ? motion.a : motion.div;
+                            return (
+                                <Comp
+                                    key={ach.title}
+                                    {...(hasLink
+                                        ? { href: ach.url, target: "_blank", rel: "noopener noreferrer" }
+                                        : {})}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                                    className={`group flex h-full min-h-[112px] items-start gap-4 rounded-xl border border-primary/25 bg-card/70 p-4 no-underline backdrop-blur-sm transition-all dark:bg-[#0d0a18] ${
+                                        hasLink ? "cursor-pointer hover:-translate-y-0.5 hover:border-primary/50 hover:shadow-md" : ""
+                                    }`}
                                 >
-                                    <ach.icon className="h-4 w-4" style={{ color: ach.color }} />
-                                </div>
-                                <div>
-                                    <h4 className="mb-1 font-mono text-xs font-semibold text-foreground">
-                                        {ach.title}
-                                    </h4>
-                                    <p className="text-[11px] text-muted-foreground">{ach.description}</p>
-                                </div>
-                            </motion.div>
-                        ))}
+                                    <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-primary/40 bg-primary/10">
+                                        <ach.icon className="h-4 w-4 text-primary" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <h4 className="mb-1 font-mono text-xs font-semibold text-foreground">
+                                            {ach.title}
+                                        </h4>
+                                        <p className="text-[11px] text-muted-foreground">{ach.description}</p>
+                                        {ach.url && (
+                                            <span className="mt-2 inline-flex items-center gap-1 text-[11px] font-medium text-primary">
+                                                {ach.linkLabel ?? "View document"}
+                                                <ExternalLink className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                                            </span>
+                                        )}
+                                    </div>
+                                </Comp>
+                            );
+                        })}
                     </div>
                 </motion.div>
             </div>
