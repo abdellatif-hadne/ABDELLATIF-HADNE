@@ -1,148 +1,196 @@
-import { Description } from "@radix-ui/react-toast";
 import { motion } from "framer-motion";
-import { ExternalLink, Github, Tags } from "lucide-react";
+import { ArrowUpRight, Github } from "lucide-react";
 
-const projects = [
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  github: string;
+  live?: string;
+  stars?: number;
+}
+
+const projects: Project[] = [
   {
     title: "PentAI",
-    description: "PentAI is an AI-powered security automation platform for reconnaissance, vulnerability discovery, pentesting operations, and offensive security workflows. ",
-    tags: ["AI", "Red Teaming", "Offensive Security","Python","JavaScript","HTML","CSS","Shell","ollama"],
+    description:
+      "AI-powered security automation platform for reconnaissance, vulnerability discovery, pentesting operations, and offensive security workflows.",
+    tags: ["AI", "Red Teaming", "Offensive Security", "Python", "JavaScript", "HTML", "CSS", "Shell", "ollama"],
     github: "https://github.com/Rizki033/PentAI",
     live: "https://pent-ai-rizki.lovable.app/",
   },
   {
     title: "oneSec",
-    description: "All-in-one bash-based security tools installer and manager with 19+ pre-configured penetration testing tools and interactive terminal UI.",
+    description:
+      "All-in-one bash-based security tools installer and manager with 19+ pre-configured penetration testing tools and interactive terminal UI.",
     tags: ["Bash", "Security", "CLI"],
     github: "https://github.com/Rizki033/oneSec",
     stars: 3,
   },
   {
     title: "NeuroScan AI",
-    description: "AI-powered web application for automatic brain tumor detection from MRI images. Features secure authentication, encrypted data, and real-time AI analysis.",
-    tags: ["React.js","Python", "FastAPI", "PyTorch/ONNX", "PostgreSQL","HTML","CSS"],
+    description:
+      "AI-powered web app for automatic brain tumor detection from MRI images. Secure authentication, encrypted data, and real-time AI analysis.",
+    tags: ["React.js", "Python", "FastAPI", "PyTorch/ONNX", "PostgreSQL", "HTML", "CSS"],
     github: "https://github.com/Rizki033/Brain-Tumor-WebApp",
     stars: 2,
   },
   {
     title: "VigilantScan",
-    description: "VigilantScan is a sleek React-based security dashboard that simulates website vulnerability scanning, highlights potential risks, and presents findings, reports, and scan activity in a modern SOC-style interface.",
-    tags: ["JavaScript","React.js","HTML","CSS"],
+    description:
+      "A sleek React security dashboard that simulates website vulnerability scanning and presents findings, reports, and scan activity in a modern SOC-style interface.",
+    tags: ["JavaScript", "React.js", "HTML", "CSS"],
     github: "https://github.com/Rizki033/VIGILANTSCAN",
     stars: 2,
   },
   {
     title: "NetSentry AI",
-    description: "AI-based DDoS attack detection system using machine learning to classify network traffic and identify malicious patterns in real-time.",
-    tags: ["Python", "Machine Learning", "Network Security","Pandas","Scikit-learn"],
+    description:
+      "AI-based DDoS attack detection system using machine learning to classify network traffic and identify malicious patterns in real-time.",
+    tags: ["Python", "Machine Learning", "Network Security", "Pandas", "Scikit-learn"],
     github: "https://github.com/Rizki033/NetSentry-AI",
     stars: 2,
   },
   {
     title: "ARP Spoofing & DNS Sniffing",
-    description: "Python script using Scapy for ARP spoofing attacks and DNS request interception on local networks for security research and education.",
+    description:
+      "Python script using Scapy for ARP spoofing attacks and DNS request interception on local networks for security research and education.",
     tags: ["Python", "Scapy", "Networking"],
     github: "https://github.com/Rizki033/ARP-Spoofing-DNS-Sniffing-Script",
     stars: 1,
   },
   {
     title: "Deep Learning Medical Imaging",
-    description: "CNN model for brain tumor classification from MRI images with feature visualization, achieving high accuracy through 600 epochs of training.",
-    tags: ["PyTorch", "Deep Learning", "Medical AI","NumPy","Matplotlib","Seaborn","OpenCV","Scikit-learn"],
+    description:
+      "CNN model for brain tumor classification from MRI images with feature visualization, achieving high accuracy through 600 epochs of training.",
+    tags: ["PyTorch", "Deep Learning", "Medical AI", "NumPy", "Matplotlib", "Seaborn", "OpenCV", "Scikit-learn"],
     github: "https://github.com/Rizki033/Deep-Learning-Model",
   },
   {
     title: "Ifrane CleanTech",
-    description: "Ifrane CleanTech is a smart waste management platform that allows citizens to report waste issues in real time using GPS and photos.It helps municipalities optimize waste collection operations through centralized dashboards and data-driven monitoring.",
-    tags: ["PHP", "JavaScript", "MySQL","Laravel"],
+    description:
+      "Smart waste management platform that lets citizens report waste issues in real time using GPS and photos, helping municipalities optimize collection.",
+    tags: ["PHP", "JavaScript", "MySQL", "Laravel"],
     github: "https://github.com/Rizki033/Ifrane-CleanTech",
   },
   {
     title: "AI-Service",
-    description: "AI-Service is a FastAPI-based facial recognition API designed for smart student attendance management. It allows a mobile application to capture and send student photos for real-time identity verification and attendance tracking.",
+    description:
+      "FastAPI-based facial recognition API for smart student attendance — capture and send photos for real-time identity verification and attendance tracking.",
     tags: ["Python", "SQLite", "FastAPI", "OpenCV", "Face Recognition"],
     github: "https://github.com/FSTG-Tracker/ai-service",
   },
   {
     title: "CTF-Challenges-Solutions",
-    description: "A collection of Capture The Flag (CTF) challenges I’ve solved, covering topics like cryptography, web exploitation, reverse engineering, and more, along with detailed explanations",
-    tags: ["Python","Cryptography","Web Exploitation","OSINT","Reverse Engineering","Forensics","Ruby","Stegnography"],
+    description:
+      "A collection of Capture The Flag challenges I've solved — cryptography, web exploitation, reverse engineering and more, with detailed write-ups.",
+    tags: ["Python", "Cryptography", "Web Exploitation", "OSINT", "Reverse Engineering", "Forensics", "Ruby", "Steganography"],
     github: "https://github.com/Rizki033/CTF-Challenges-Solutions",
-  }
+  },
 ];
+
+const MAX_TAGS = 5;
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const visibleTags = project.tags.slice(0, MAX_TAGS);
+  const extra = project.tags.length - MAX_TAGS;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
+      className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
+    >
+      {/* Header */}
+      <div className="mb-3 flex items-start justify-between gap-3">
+        <div className="flex items-center gap-2.5">
+          <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-primary">
+            {project.title}
+          </h3>
+          {project.live && (
+            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              Live
+            </span>
+          )}
+        </div>
+        <div className="flex shrink-0 items-center gap-2 text-muted-foreground">
+          {project.live && (
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${project.title} live website`}
+              className="transition-colors hover:text-primary"
+            >
+              <ArrowUpRight className="h-[18px] w-[18px]" />
+            </a>
+          )}
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`View ${project.title} on GitHub`}
+            className="transition-colors hover:text-primary"
+          >
+            <Github className="h-[18px] w-[18px]" />
+          </a>
+        </div>
+      </div>
+
+      {/* Description */}
+      <p className="mb-5 flex-1 text-sm leading-relaxed text-muted-foreground">
+        {project.description}
+      </p>
+
+      {/* Footer */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        {visibleTags.map((tag) => (
+          <span
+            key={tag}
+            className="rounded-md border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
+          >
+            {tag}
+          </span>
+        ))}
+        {extra > 0 && (
+          <span className="px-1 text-[10px] text-primary/80">+{extra}</span>
+        )}
+      </div>
+    </motion.div>
+  );
+};
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="relative py-20 md:py-28">
+      <div className="container mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
+          className="mb-14 text-center"
         >
-          <div className="text-center mb-12">
-            <h2 className="font-mono text-3xl md:text-4xl font-bold text-foreground mb-2">
-              <span className="text-primary">~/</span>Projects
-              <span className="text-[#a78bfa]"></span>
-            </h2>
-            <div className="w-16 h-0.5 bg-primary/50 mx-auto mt-4" />
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="group p-5 rounded-lg border border-border bg-card card-glow transition-all flex flex-col"
-              >
-                <div className="flex items-center justify-between mb-3">
-                  <h3 className="font-mono text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
-                  <div className="flex items-center gap-2">
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Visit ${project.title} live website`}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${project.title} on GitHub`}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      <Github className="w-4 h-4" />
-                    </a>
-                  </div>
-                </div>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-4 flex-1">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-[10px] font-mono rounded bg-muted text-muted-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wide text-primary shadow-sm">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            PROJECTS
+          </span>
+          <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+            Things I&apos;ve <span className="gradient-text">built</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
+            A selection of security tools, AI systems, and full-stack apps I&apos;ve shipped.
+          </p>
         </motion.div>
+
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project, i) => (
+            <ProjectCard key={project.title} project={project} index={i} />
+          ))}
+        </div>
       </div>
     </section>
   );
