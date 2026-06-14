@@ -13,10 +13,8 @@ const HomePage = () => {
     return (
         <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 selection:text-primary relative overflow-hidden">
             {/* Background Decor */}
-            <div className="fixed inset-0 starfield pointer-events-none opacity-90" />
-            <div className="fixed inset-0 cyber-grid pointer-events-none opacity-20" />
-
-            <div className="fixed inset-0 scanline pointer-events-none opacity-60" />
+            <div className="aurora" aria-hidden="true" />
+            <div className="fixed inset-0 grain pointer-events-none" />
 
             <Navbar />
 
