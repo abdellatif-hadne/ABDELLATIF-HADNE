@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Briefcase, Heart } from "lucide-react";
+import { Briefcase, Heart, MapPin, CalendarDays } from "lucide-react";
 
 interface ExpEntry {
   title: string;
@@ -17,53 +17,38 @@ const experience: ExpEntry[] = [
   {
     title: "Étudiant en Cybersécurité - Programme SkillUp IT 2026",
     organization: "EMAN Aerospace",
-    period: "mars 2026 – A distance · 3 mois",
-    location: "Marrakech, Maroc · A distance",
-    contract: "Contrat en alternance",
+    period: "mars 2026 · 3 mois",
+    location: "Marrakech, Maroc · À distance",
+    contract: "Alternance",
     description:
-      "Programme d'Immersion Professionnelle – SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Universite Cadi Ayyad. Integration d'une equipe d'ingenierie pour concevoir et deployer une solution complete de cybersecurite et d'architecture IT pour un environnement universitaire reel.",
+      "Programme d'Immersion Professionnelle – SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad. Intégration d'une équipe d'ingénierie pour concevoir et déployer une solution complète de cybersécurité et d'architecture IT pour un environnement universitaire réel.",
     missions: [
-      "Audit & Securite : Detection et analyse de vulnerabilites sur une infrastructure critique.",
-      "Architecture : Conception de l'architecture applicative et securisation de l'infrastructure reseau.",
-      "Gouvernance : Mise en conformite des configurations et definition des politiques de continuite d'activite (PCA).",
-      "Gestion de Projet : Application de la methodologie Agile (KANBAN) pour le suivi des livrables techniques.",
+      "Audit & Sécurité : détection et analyse de vulnérabilités sur une infrastructure critique.",
+      "Architecture : conception de l'architecture applicative et sécurisation de l'infrastructure réseau.",
+      "Gouvernance : mise en conformité des configurations et définition des politiques de continuité d'activité (PCA).",
+      "Gestion de Projet : application de la méthodologie Agile (KANBAN) pour le suivi des livrables techniques.",
     ],
-    skills: ["Configuration Compliance", "ServiceNow Integration", "Analyse de vulnerabilites", "Architecture de securite", "Methodologie Agile", "Gouvernance IT & Conformite"],
-    logoUrl: "https://media.licdn.com/dms/image/v2/D4E0BAQFkrHCMWL8FWg/company-logo_200_200/company-logo_200_200/0/1701456642519?e=2147483647&v=beta&t=Ii5oV3H78GaHpxWtyBEPZ2j0HkdisS3V8FkMFLaJYcY",
+    skills: ["Configuration Compliance", "ServiceNow Integration", "Analyse de vulnérabilités", "Architecture de sécurité", "Méthodologie Agile", "Gouvernance IT & Conformité"],
+    logoUrl: "/logos/eman.png",
   },
   {
     title: "Bug Bounty Hunter (Independent Researcher)",
     organization: "Bugcrowd & HackerOne",
-    period: "janv. 2026 – Present · 4 mois",
-    location: "Remote · Independant",
-    contract: "Independant",
+    period: "janv. 2026 – Présent · 4 mois",
+    location: "Remote · Indépendant",
+    contract: "Indépendant",
     missions: [
-      "Conducting web application security testing through Bugcrowd platform.",
+      "Conducting web application security testing through the Bugcrowd platform.",
       "Identifying and reporting security vulnerabilities.",
       "Practicing vulnerability research and responsible disclosure.",
     ],
-    skills: ["Burp Suite", "Nmap", "Web Application Testing", "Vulnerability Research", "Responsible Disclosure","XSS","IDOR","SQL Injection"],
-    logoUrl: "https://cdn.simpleicons.org/bugcrowd/F26822",
+    skills: ["Burp Suite", "Nmap", "Web Application Testing", "Vulnerability Research", "Responsible Disclosure", "XSS", "IDOR", "SQL Injection"],
+    logoUrl: "/logos/hackerone.png",
   },
-  // {
-  //   title: "Bug Bounty Hunter | Independent Security Researcher",
-  //   organization: "HackerOne",
-  //   period: "janv. 2026 – Present · 4 mois",
-  //   location: "Remote · Independant",
-  //   contract: "Independant",
-  //   missions: [
-  //     "Practicing real-world web application penetration testing.",
-  //     "Identifying vulnerabilities such as XSS, IDOR, and SQL Injection.",
-  //     "Learning responsible disclosure processes.",
-  //     "Improving reconnaissance and exploitation techniques.",
-  //   ],
-  //   skills: ["Burp Suite", "Nmap", "XSS", "IDOR", "SQL Injection", "Reconnaissance"],
-  //   logoUrl: "https://cdn.simpleicons.org/hackerone/494649",
-  // },
   {
     title: "Cybersecurity CTF Player | Red Team Practice",
     organization: "TryHackMe",
-    period: "janv. 2025 – Present · 1 an 5 mois",
+    period: "janv. 2025 – Présent · 1 an 5 mois",
     location: "Remote · Temps partiel",
     contract: "Temps partiel",
     missions: [
@@ -73,7 +58,7 @@ const experience: ExpEntry[] = [
       "Hands-on labs with Linux, networking and exploitation.",
     ],
     skills: ["CTF", "Red Team", "Linux", "Networking", "Privilege Escalation", "Web Exploitation"],
-    logoUrl: "https://cdn.simpleicons.org/tryhackme/212C42",
+    logoUrl: "/logos/tryhackme.png",
   },
 ];
 
@@ -81,7 +66,7 @@ const volunteering: ExpEntry[] = [
   {
     title: "Member",
     organization: "Google Developer Groups Marrakesh",
-    period: "Dec 2025 – Present",
+    period: "Dec 2025 – Présent",
     location: "Marrakesh, Morocco",
     contract: "Member",
     description:
@@ -128,21 +113,24 @@ const volunteering: ExpEntry[] = [
   },
 ];
 
+const resolveLogo = (logoUrl: string) =>
+  logoUrl.startsWith("http")
+    ? logoUrl
+    : `${import.meta.env.BASE_URL}${logoUrl.replace(/^\//, "")}`;
+
 const LogoBox = ({ entry }: { entry: ExpEntry }) => (
-  <div className="w-14 h-14 rounded-xl overflow-hidden border border-border bg-black/60 flex items-center justify-center shrink-0">
+  <div className="grid h-16 w-16 place-items-center overflow-hidden rounded-2xl border border-border bg-white p-1.5 shadow-sm ring-4 ring-background">
     <img
-      src={entry.logoUrl}
+      src={resolveLogo(entry.logoUrl)}
       alt={entry.organization}
-      width={42}
-      height={42}
-      className="object-contain"
+      className="h-full w-full object-contain"
       onError={(e) => {
         const t = e.target as HTMLImageElement;
         t.style.display = "none";
         const p = t.parentElement;
         if (p) {
           const span = document.createElement("span");
-          span.style.cssText = "font-size:16px;font-weight:bold;color:#aaa;font-family:'JetBrains Mono',monospace;";
+          span.style.cssText = "font-size:14px;font-weight:700;color:#3a5bf7;font-family:'JetBrains Mono',monospace;";
           span.textContent = entry.organization.slice(0, 2).toUpperCase();
           p.appendChild(span);
         }
@@ -151,74 +139,56 @@ const LogoBox = ({ entry }: { entry: ExpEntry }) => (
   </div>
 );
 
-const ExperienceCard = ({
-  entry,
-  accentClass,
-  index,
-}: {
-  entry: ExpEntry;
-  accentClass: string;
-  index: number;
-}) => (
+const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.4, delay: index * 0.08 }}
-    className="p-6 rounded-xl border border-border bg-card/40 backdrop-blur-sm hover:border-primary/40 hover:bg-primary/5 transition-all"
+    viewport={{ once: true, margin: "-60px" }}
+    transition={{ duration: 0.45, delay: index * 0.06 }}
+    className="surface card-glow rounded-2xl p-5 sm:p-6 shadow-sm"
   >
     {/* Header */}
-    <div className="flex items-start gap-4 mb-5">
-      <LogoBox entry={entry} />
-      <div className="flex-1 min-w-0">
-        {/* Title — large and clear */}
-        <h4
-          className="text-base font-bold text-foreground leading-snug mb-1"
-          style={{ fontFamily: "'JetBrains Mono', monospace" }}
-        >
-          {entry.title}
-        </h4>
-        {/* Organization */}
-        <p className={`text-sm font-semibold mb-1 ${accentClass}`}>
-          {entry.organization}
-        </p>
-        {/* Period + contract */}
-        <p className="text-sm text-muted-foreground">
-          {entry.period} &middot; {entry.contract}
-        </p>
-        {/* Location */}
-        <p className="text-sm text-muted-foreground/60 mt-0.5">{entry.location}</p>
+    <div className="mb-4">
+      <h4 className="text-base font-semibold leading-snug text-foreground">{entry.title}</h4>
+      <p className="mt-1 text-sm font-medium text-primary">{entry.organization}</p>
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
+        <span className="inline-flex items-center gap-1.5">
+          <CalendarDays className="h-3.5 w-3.5" />
+          {entry.period}
+        </span>
+        <span className="inline-flex items-center gap-1.5">
+          <MapPin className="h-3.5 w-3.5" />
+          {entry.location}
+        </span>
+        <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
+          {entry.contract}
+        </span>
       </div>
     </div>
 
     {/* Description */}
     {entry.description && (
-      <p className="text-sm text-foreground/70 leading-relaxed mb-4 pl-3 border-l-2 border-border">
+      <p className="mb-4 border-l-2 border-primary/30 pl-3 text-sm leading-relaxed text-muted-foreground">
         {entry.description}
       </p>
     )}
 
     {/* Missions */}
-    <div className="mb-4">
-      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-widest mb-3">
-        Missions
-      </p>
-      <ul className="space-y-2">
-        {entry.missions.map((m, i) => (
-          <li key={i} className="flex gap-3 text-sm text-foreground/75 leading-relaxed">
-            <span className={`shrink-0 font-bold mt-0.5 ${accentClass}`}>›</span>
-            {m}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className="mb-4 space-y-2">
+      {entry.missions.map((m, i) => (
+        <li key={i} className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground">
+          <span className="mt-0.5 shrink-0 font-bold text-primary">›</span>
+          {m}
+        </li>
+      ))}
+    </ul>
 
     {/* Skills */}
-    <div className="flex flex-wrap gap-2 pt-4 border-t border-border/40">
+    <div className="flex flex-wrap gap-1.5 border-t border-border/60 pt-4">
       {entry.skills.map((s) => (
         <span
           key={s}
-          className="text-xs px-2.5 py-1 rounded-md border border-border bg-card/80 text-muted-foreground font-medium"
+          className="rounded-md border border-border px-2 py-0.5 text-[10px] font-medium text-muted-foreground"
         >
           {s}
         </span>
@@ -227,90 +197,74 @@ const ExperienceCard = ({
   </motion.div>
 );
 
+const Timeline = ({
+  title,
+  icon: Icon,
+  entries,
+}: {
+  title: string;
+  icon: typeof Briefcase;
+  entries: ExpEntry[];
+}) => (
+  <div>
+    {/* Sub-header */}
+    <div className="mb-8 flex items-center gap-3">
+      <div className="grid h-10 w-10 place-items-center rounded-xl bg-primary/10 text-primary">
+        <Icon className="h-5 w-5" />
+      </div>
+      <div>
+        <h3 className="text-lg font-bold text-foreground">{title}</h3>
+        <p className="text-sm text-muted-foreground">
+          {entries.length} {entries.length === 1 ? "entry" : "entries"}
+        </p>
+      </div>
+    </div>
+
+    {/* Timeline */}
+    <div className="relative">
+      {/* vertical line */}
+      <div className="absolute left-8 top-3 bottom-3 w-px bg-gradient-to-b from-primary/50 via-border to-transparent" />
+      <div className="space-y-6">
+        {entries.map((entry, i) => (
+          <div key={entry.title + i} className="relative pl-[76px] sm:pl-24">
+            <div className="absolute left-0 top-0 z-10">
+              <LogoBox entry={entry} />
+            </div>
+            <ExperienceCard entry={entry} index={i} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
 const ExperienceSection = () => {
   return (
-    <section id="experience" className="py-16 md:py-24 relative">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section id="experience" className="py-20 md:py-28 relative">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
+          className="mb-14 text-center"
         >
-          {/* Page title */}
-          <div className="text-center mb-12 md:mb-16">
-            <h2
-              className="text-3xl md:text-4xl font-bold text-foreground mb-3"
-              style={{ fontFamily: "'JetBrains Mono', monospace" }}
-            >
-              <span className="text-primary">~/</span>Experience
-              <span className="text-[#a78bfa]">.</span>
-            </h2>
-            <p className="text-muted-foreground text-base">
-              Professional journey in cybersecurity &amp; community engagement
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-start">
-
-            {/* ── Work Column ── */}
-            <div>
-              {/* Section title */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                  <Briefcase className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    Work
-                  </h3>
-                  <p className="text-sm text-muted-foreground">{experience.length} positions</p>
-                </div>
-              </div>
-
-              <div className="space-y-5">
-                {experience.map((exp, i) => (
-                  <ExperienceCard
-                    key={exp.title + i}
-                    entry={exp}
-                    accentClass="text-primary"
-                    index={i}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* ── Volunteering Column ── */}
-            <div>
-              {/* Section title */}
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-lg bg-[#4cc9f0]/10 text-[#4cc9f0]">
-                  <Heart className="w-5 h-5" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-foreground" style={{ fontFamily: "'JetBrains Mono', monospace" }}>
-                    Volunteering
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {volunteering.length} {volunteering.length === 1 ? "position" : "positions"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="space-y-5">
-                {volunteering.map((vol, i) => (
-                  <ExperienceCard
-                    key={vol.title + i}
-                    entry={vol}
-                    accentClass="text-[#4cc9f0]"
-                    index={i}
-                  />
-                ))}
-              </div>
-            </div>
-
-          </div>
+          <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-mono tracking-wide text-primary shadow-sm">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
+            EXPERIENCE
+          </span>
+          <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+            My <span className="gradient-text">journey</span> so far
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
+            A professional path through cybersecurity, research, and community engagement.
+          </p>
         </motion.div>
+
+        <div className="grid grid-cols-1 gap-12 md:gap-10 lg:grid-cols-2 items-start">
+          <Timeline title="Work Experience" icon={Briefcase} entries={experience} />
+          <Timeline title="Volunteering" icon={Heart} entries={volunteering} />
+        </div>
       </div>
     </section>
   );
