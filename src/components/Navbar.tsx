@@ -26,13 +26,13 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: "About", href: "#about" },
-        { name: "Skills", href: "#skills" },
-        { name: "Experience", href: "#experience" },
-        { name: "Education", href: "#education" },
-        { name: "Projects", href: "#projects" },
-        { name: "Certs", href: "#certs" },
-        { name: "Contact", href: "#contact" },
+        { name: "About", href: "/#about" },
+        { name: "Skills", href: "/#skills" },
+        { name: "Experience", href: "/#experience" },
+        { name: "Projects", href: "/#projects" },
+        { name: "Blog", href: "/blog" },
+        { name: "Certs", href: "/#certs" },
+        { name: "Contact", href: "/#contact" },
     ];
 
     return (
@@ -43,7 +43,7 @@ const Navbar = () => {
                     : "border-border/60 bg-background/72 shadow-[0_14px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl"
                     }`}
             >
-                <a href="#" className="flex items-center gap-3 group shrink-0">
+                <a href="/" className="flex items-center gap-3 group shrink-0">
                     <span className="font-sans text-[1.75rem] font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
                         0xRizki
                     </span>
