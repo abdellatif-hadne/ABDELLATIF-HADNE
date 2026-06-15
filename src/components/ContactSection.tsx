@@ -1,5 +1,31 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2, Check, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
+
+const FORM_ENDPOINT = "https://send.pageclip.co/M6DsQNaVJXhIJ81gPAyi5prHfmAJr5iO";
+
+const successToast = () =>
+    toast.custom(
+        () => (
+            <div className="flex w-full items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 shadow-md">
+                <Check className="h-4 w-4 shrink-0 text-emerald-500" strokeWidth={3} />
+                <span className="text-sm font-medium text-foreground">Message sent successfully</span>
+            </div>
+        ),
+        { unstyled: true, duration: 4000 },
+    );
+
+const errorToast = () =>
+    toast.custom(
+        () => (
+            <div className="flex w-full items-center gap-2.5 rounded-xl border border-border bg-card px-4 py-3 shadow-md">
+                <AlertTriangle className="h-4 w-4 shrink-0 text-rose-500" strokeWidth={2.5} />
+                <span className="text-sm font-medium text-foreground">Couldn&apos;t send — email me directly</span>
+            </div>
+        ),
+        { unstyled: true, duration: 5000 },
+    );
 
 const contactInfo = [
     { icon: Mail, label: "Email", value: "rizkiabdelhadi4@gmail.com", href: "mailto:rizkiabdelhadi4@gmail.com" },
@@ -11,6 +37,34 @@ const inputClass =
     "w-full px-4 py-3 rounded-xl bg-background/60 border border-border text-sm text-foreground placeholder:text-muted-foreground/70 outline-none transition-all focus:border-primary focus:ring-2 focus:ring-primary/20";
 
 const ContactSection = () => {
+    const [submitting, setSubmitting] = useState(false);
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        const form = e.currentTarget;
+
+        const body = new URLSearchParams();
+        new FormData(form).forEach((value, key) => body.append(key, value.toString()));
+
+        setSubmitting(true);
+        try {
+            // Pageclip saves the submission but blocks reading its response (CORS),
+            // so we send with no-cors and treat a completed request as success.
+            await fetch(FORM_ENDPOINT, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: body.toString(),
+            });
+            successToast();
+            form.reset();
+        } catch {
+            errorToast();
+        } finally {
+            setSubmitting(false);
+        }
+    };
+
     return (
         <section id="contact" className="py-20 md:py-28 relative">
             <div className="container mx-auto px-6 max-w-5xl">
@@ -68,19 +122,15 @@ const ContactSection = () => {
                         </div>
 
                         {/* Form */}
-                        <form
-                            action="https://send.pageclip.co/M6DsQNaVJXhIJ81gPAyi5prHfmAJr5iO"
-                            method="post"
-                            className="surface rounded-2xl p-7 shadow-sm space-y-4 pageclip-form"
-                        >
+                        <form onSubmit={handleSubmit} className="surface rounded-2xl p-7 shadow-sm space-y-4">
                             <div className="grid sm:grid-cols-2 gap-4">
                                 <div>
                                     <label htmlFor="contact-name" className="sr-only">Your name</label>
-                                    <input id="contact-name" name="name" type="text" autoComplete="name" placeholder="Your name" className={inputClass} />
+                                    <input id="contact-name" name="name" type="text" autoComplete="name" placeholder="Your name" required className={inputClass} />
                                 </div>
                                 <div>
                                     <label htmlFor="contact-email" className="sr-only">Email address</label>
-                                    <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="Email address" className={inputClass} />
+                                    <input id="contact-email" name="email" type="email" autoComplete="email" placeholder="Email address" required className={inputClass} />
                                 </div>
                             </div>
                             <label htmlFor="contact-subject" className="sr-only">Subject</label>
@@ -91,14 +141,25 @@ const ContactSection = () => {
                                 name="message"
                                 placeholder="Your message…"
                                 rows={6}
+                                required
                                 className={`${inputClass} resize-none`}
                             ></textarea>
                             <button
                                 type="submit"
-                                className="group w-full flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-8px_hsl(var(--primary)/0.7)] pageclip-form__submit"
+                                disabled={submitting}
+                                className="group w-full flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-sm font-semibold text-primary-foreground shadow-[0_10px_30px_-8px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_40px_-8px_hsl(var(--primary)/0.7)] disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
                             >
-                                <span>Send message</span>
-                                <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                {submitting ? (
+                                    <>
+                                        <Loader2 className="w-4 h-4 animate-spin" />
+                                        <span>Sending…</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <span>Send message</span>
+                                        <Send className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                                    </>
+                                )}
                             </button>
                         </form>
                     </div>
