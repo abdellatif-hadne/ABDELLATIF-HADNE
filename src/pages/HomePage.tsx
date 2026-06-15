@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Reveal from "../components/Reveal";
 import HeroSection from "../components/HeroSection";
+import BlogSection from "../components/BlogSection";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
 import ExperienceSection from "../components/ExperienceSection";
@@ -26,6 +27,7 @@ const HomePage = () => {
                 <Reveal><ExperienceSection /></Reveal>
                 <Reveal><EducationSection /></Reveal>
                 <Reveal><ProjectsSection /></Reveal>
+                <Reveal><BlogSection /></Reveal>
                 <Reveal><CVSection /></Reveal>
                 <Reveal><CertsSection /></Reveal>
                 <Reveal><ContactSection /></Reveal>
