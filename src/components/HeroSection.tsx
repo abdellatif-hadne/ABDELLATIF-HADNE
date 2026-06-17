@@ -54,7 +54,7 @@ const HeroSection = () => {
                     transition={{ duration: 0.5, delay: 0.3 }}
                     className="max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
                 >
-                    Cybersecurity engineering student across offensive &amp; defensive security — from penetration testing to threat detection and SOC — with a focus on AI applied to security.
+                    Cybersecurity engineering student across offensive &amp; defensive security  from penetration testing to threat detection and SOC with a focus on AI applied to security.
                 </motion.p>
 
 
