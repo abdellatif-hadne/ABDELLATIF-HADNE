@@ -1,16 +1,17 @@
 import { motion } from "framer-motion";
-import { Briefcase, Heart, MapPin, CalendarDays } from "lucide-react";
+import { Briefcase, Heart, MapPin, CalendarDays, ExternalLink } from "lucide-react";
 
 interface ExpEntry {
   title: string;
   organization: string;
   period: string;
   location: string;
-  contract: string;
+  contract?: string;
   description?: string;
   missions: string[];
   skills: string[];
   logoUrl: string;
+  url?: string;
 }
 
 const experience: ExpEntry[] = [
@@ -28,6 +29,7 @@ const experience: ExpEntry[] = [
     ],
     skills: ["Configuration Compliance", "ServiceNow Integration", "Analyse de vulnérabilités", "Architecture de sécurité", "Méthodologie Agile", "Gouvernance IT & Conformité"],
     logoUrl: "/logos/eman.png",
+    url: "https://emanaerospace.com/",
   },
   {
     title: "Bug Bounty Hunter (Independent Researcher)",
@@ -62,52 +64,34 @@ const experience: ExpEntry[] = [
 
 const volunteering: ExpEntry[] = [
   {
+    title: "Member & Event Volunteer",
+    organization: "Google Developer Groups Marrakesh",
+    period: "Dec 2025 – Present",
+    location: "Marrakesh, Morocco",
+    description:
+      "Active community member, volunteering at GDG flagship events including DevFest 2025 and Build With AI 2026.",
+    missions: [
+      "Supported event logistics, coordination and on-site experience.",
+      "Engaged with developers through talks, workshops and networking.",
+    ],
+    skills: ["Community", "Event Management", "Networking"],
+    logoUrl: "/logos/GDG.png",
+    url: "https://gdg.community.dev/gdg-marrakesh/",
+  },
+  {
     title: "Member",
-    organization: "Google Developer Groups Marrakesh",
-    period: "Dec 2025 – Présent",
+    organization: "n8n Marrakech Community",
+    period: "2026 – Present",
     location: "Marrakesh, Morocco",
-    contract: "Member",
     description:
-      "Active member of the local developer community, participating in events, technical sessions, and community-building initiatives.",
+      "Member of the local n8n community focused on workflow automation and no-code / low-code tooling.",
     missions: [
-      "Participating in community events and technical meetups.",
-      "Engaging with developers through knowledge-sharing and networking sessions.",
-      "Supporting the growth of the local tech community through active involvement.",
+      "Participating in automation meetups and hands-on sessions.",
+      "Exploring n8n workflows for security and productivity automation.",
     ],
-    skills: ["Community Building", "Networking", "Tech Community Engagement"],
-    logoUrl: "https://cdn.simpleicons.org/googledevelopers/4285F4",
-  },
-  {
-    title: "DevFest 2025 Volunteer",
-    organization: "Google Developer Groups Marrakesh",
-    period: "2025",
-    location: "Marrakesh, Morocco",
-    contract: "Volunteer",
-    description:
-      "Supported the organization and on-site execution of DevFest 2025, helping create a smooth experience for attendees and speakers.",
-    missions: [
-      "Assisted with event logistics and attendee coordination.",
-      "Supported event flow during sessions and community activities.",
-      "Helped create an engaging and welcoming environment for participants.",
-    ],
-    skills: ["Event Management", "Team Collaboration", "Public Relations"],
-    logoUrl: "https://cdn.simpleicons.org/googledevelopers/4285F4",
-  },
-  {
-    title: "Build With AI 2026 Volunteer",
-    organization: "Google Developer Groups Marrakesh",
-    period: "2026",
-    location: "Marrakesh, Morocco",
-    contract: "Volunteer",
-    description:
-      "Contributed to the delivery of Build With AI 2026 by supporting community activities and helping coordinate the event experience.",
-    missions: [
-      "Helped with event preparation and volunteer coordination.",
-      "Supported workshops and AI-focused community sessions.",
-      "Assisted attendees and contributed to overall event operations.",
-    ],
-    skills: ["Event Support", "AI Community Engagement", "Coordination"],
-    logoUrl: "https://cdn.simpleicons.org/googledevelopers/4285F4",
+    skills: ["Automation", "n8n", "Community"],
+    logoUrl: "/logos/n8n.png",
+    url: "https://luma.com/n8n-marrakech",
   },
 ];
 
@@ -148,7 +132,19 @@ const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) =>
     {/* Header */}
     <div className="mb-4">
       <h4 className="text-base font-semibold leading-snug text-foreground">{entry.title}</h4>
-      <p className="mt-1 text-sm font-medium text-primary">{entry.organization}</p>
+      {entry.url ? (
+        <a
+          href={entry.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
+        >
+          {entry.organization}
+          <ExternalLink className="h-3 w-3" />
+        </a>
+      ) : (
+        <p className="mt-1 text-sm font-medium text-primary">{entry.organization}</p>
+      )}
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <CalendarDays className="h-3.5 w-3.5" />
@@ -158,9 +154,11 @@ const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) =>
           <MapPin className="h-3.5 w-3.5" />
           {entry.location}
         </span>
-        <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
-          {entry.contract}
-        </span>
+        {entry.contract && (
+          <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
+            {entry.contract}
+          </span>
+        )}
       </div>
     </div>
 
@@ -226,7 +224,13 @@ const Timeline = ({
         {entries.map((entry, i) => (
           <div key={entry.title + i} className="relative pl-[76px] sm:pl-24">
             <div className="absolute left-0 top-0 z-10">
-              <LogoBox entry={entry} />
+              {entry.url ? (
+                <a href={entry.url} target="_blank" rel="noopener noreferrer" aria-label={entry.organization}>
+                  <LogoBox entry={entry} />
+                </a>
+              ) : (
+                <LogoBox entry={entry} />
+              )}
             </div>
             <ExperienceCard entry={entry} index={i} />
           </div>
