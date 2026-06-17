@@ -21,11 +21,9 @@ const experience: ExpEntry[] = [
     location: "Marrakech, Maroc · À distance",
     contract: "Alternance",
     description:
-      "Programme d'Immersion Professionnelle – SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad. Intégration d'une équipe d'ingénierie pour concevoir et déployer une solution complète de cybersécurité et d'architecture IT pour un environnement universitaire réel.",
+      "Programme d'Immersion Professionnelle – SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad.",
     missions: [
-      "Audit & Sécurité : détection et analyse de vulnérabilités sur une infrastructure critique.",
       "Architecture : conception de l'architecture applicative et sécurisation de l'infrastructure réseau.",
-      "Gouvernance : mise en conformité des configurations et définition des politiques de continuité d'activité (PCA).",
       "Gestion de Projet : application de la méthodologie Agile (KANBAN) pour le suivi des livrables techniques.",
     ],
     skills: ["Configuration Compliance", "ServiceNow Integration", "Analyse de vulnérabilités", "Architecture de sécurité", "Méthodologie Agile", "Gouvernance IT & Conformité"],
