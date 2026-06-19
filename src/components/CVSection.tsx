@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, FileText, Globe2, Languages } from "lucide-react";
 
 const cvLinks = {
-    fr: "https://drive.google.com/file/d/10mGH0es9_RsE52nt4-gM0uROP9BAYgMK/view?usp=sharing",
-    en: "https://drive.google.com/file/d/1jZtJ3i59KZyHyhvutUE_7Al_z6PTAJxH/view?usp=sharing",
+    fr: "https://drive.google.com/file/d/10mGH0es9_RsE52",
+    en: "https://drive.g",
 };
 
 const resumes = [
