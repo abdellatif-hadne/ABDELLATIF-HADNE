@@ -16,6 +16,21 @@ interface ExpEntry {
 
 const experience: ExpEntry[] = [
   {
+    title: "SOC Analyst Intern – SIEM Implementation & Security Monitoring",
+    organization: "ARWA Medic",
+    period: "juin 2026 – Présent · 1 semaine",
+    location: "Marrakech, Maroc",
+    contract: "Stage",
+    missions: [
+      "Mise en place et configuration d'une solution SIEM pour la surveillance de sécurité.",
+      "Monitoring des événements de sécurité et analyse des logs en temps réel.",
+      "Détection, triage et investigation des incidents de sécurité.",
+    ],
+    skills: ["SOC", "SIEM", "Security Monitoring", "Log Analysis", "Incident Response", "Blue Team"],
+    logoUrl: "/logos/ARWA_Medic.png",
+    url: "https://www.arwamedic.com/",
+  },
+  {
     title: "Étudiant en Cybersécurité - Programme SkillUp IT 2026",
     organization: "EMAN Aerospace",
     period: "mars 2026 · 3 mois",
@@ -79,7 +94,7 @@ const volunteering: ExpEntry[] = [
     url: "https://gdg.community.dev/gdg-marrakesh/",
   },
   {
-    title: "Member",
+    title: "Co-Founder",
     organization: "n8n Marrakech Community",
     period: "2026 – Present",
     location: "Marrakesh, Morocco",
