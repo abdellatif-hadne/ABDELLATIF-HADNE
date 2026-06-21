@@ -33,7 +33,7 @@ const experience: ExpEntry[] = [
   {
     title: "Étudiant en Cybersécurité - Programme SkillUp IT 2026",
     organization: "EMAN Aerospace",
-    period: "mars 2026 · 3 mois",
+    period: "mars 2026 · 4 mois",
     location: "Marrakech, Maroc · À distance",
     contract: "Alternance",
     description:
