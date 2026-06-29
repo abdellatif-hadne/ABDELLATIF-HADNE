@@ -16,17 +16,18 @@ interface ExpEntry {
 
 const experience: ExpEntry[] = [
   {
-    title: "SOC Analyst Intern – SIEM Implementation & Security Monitoring",
+    title: "SOC Analyst Intern – SIEM Intelligence & Security Monitoring",
     organization: "ARWA Medic",
-    period: "juin 2026 – Présent · 1 semaine",
+    period: "juin 2026 – Présent · 2 mois",
     location: "Marrakech, Maroc",
     contract: "Stage",
     missions: [
-      "Mise en place et configuration d'une solution SIEM pour la surveillance de sécurité.",
-      "Monitoring des événements de sécurité et analyse des logs en temps réel.",
-      "Détection, triage et investigation des incidents de sécurité.",
+      "SIEM Intelligence enrichi par l'IA",
+      "Threat Intelligence & MITRE ATT&CK",
+      "Réponse à incident & forensics",
+      "Audit de configuration & de sécurité interne",
     ],
-    skills: ["SOC", "SIEM", "Security Monitoring", "Log Analysis", "Incident Response", "Blue Team"],
+    skills: ["SOC", "Wazuh", "SIEM", "TheHive", "Cortex", "AI Integration", "Threat Intelligence", "MITRE ATT&CK", "Incident Response", "Digital Forensics", "Vulnerability Remediation", "Configuration Audit", "Internal Security Audit", "Security Monitoring", "Blue Team"],
     logoUrl: "/logos/ARWA_Medic.png",
     url: "https://www.arwamedic.com/",
   },
