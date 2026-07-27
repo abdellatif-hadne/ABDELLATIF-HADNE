@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
 
@@ -92,16 +93,29 @@ const projects: Project[] = [
 const MAX_TAGS = 5;
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
   const visibleTags = project.tags.slice(0, MAX_TAGS);
   const extra = project.tags.length - MAX_TAGS;
 
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = cardRef.current;
+    if (!card) return;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    card.style.setProperty("--mx", `${x}px`);
+    card.style.setProperty("--my", `${y}px`);
+  };
+
   return (
     <motion.div
+      ref={cardRef}
+      onMouseMove={handleMouseMove}
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-      className="group flex flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
+      className="group card-spotlight card-accent relative overflow-hidden flex flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
     >
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
