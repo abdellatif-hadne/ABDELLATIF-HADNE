@@ -10,6 +10,7 @@ import ProjectsSection from "../components/ProjectsSection";
 import CertsSection from "../components/CertsSection";
 import ContactSection from "../components/ContactSection";
 import CVSection from "../components/CVSection";
+import Terminal from "../components/Terminal";
 
 const HomePage = () => {
     return (
@@ -33,8 +34,10 @@ const HomePage = () => {
                 <Reveal><ContactSection /></Reveal>
             </main>
 
+            <Terminal />
+
             {/* <footer className="py-10 text-center text-muted-foreground text-xs font-mono relative z-10 border-t border-border/50">
-                <p>&copy; {new Date().getFullYear()} 0xRizki. All systems nomina    l.</p>
+                <p>&copy; {new Date().getFullYear()} 0xRizki. All systems nominal.</p>
             </footer> */}
         </div>
     );
