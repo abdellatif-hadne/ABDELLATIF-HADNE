@@ -4,10 +4,16 @@
 <head>
   <meta charset="UTF-8" />
   <script>
-    // Apply saved theme before first paint to avoid a flash. Default = light.
+    // Apply saved theme or system preference before first paint to avoid a flash.
     (function () {
       try {
-        var t = localStorage.getItem("portfolio-theme") === "dark" ? "dark" : "light";
+        var stored = localStorage.getItem("portfolio-theme");
+        var t = "light";
+        if (stored === "dark" || stored === "light") {
+          t = stored;
+        } else {
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
         document.documentElement.classList.remove("light", "dark");
         document.documentElement.classList.add(t);
         document.documentElement.style.colorScheme = t;
