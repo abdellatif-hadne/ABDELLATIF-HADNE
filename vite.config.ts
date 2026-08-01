@@ -18,4 +18,25 @@ export default defineConfig(({ command }) => ({
             "@": path.resolve(__dirname, "./src"),
         },
     },
+    build: {
+        // The remaining large chunks after manualChunks below (mermaid's core +
+        // cytoscape, used for architecture/mindmap diagrams) are lazy-loaded only
+        // on blog posts that embed those specific diagram types — they never touch
+        // the initial page load, so the default 500 kB warning is just noise here.
+        chunkSizeWarningLimit: 700,
+        rollupOptions: {
+            output: {
+                // Split large, rarely-changing vendor deps out of the main
+                // entry chunk so it stays under the 500 kB warning threshold
+                // and browsers can cache each piece independently.
+                manualChunks(id) {
+                    if (id.indexOf("node_modules") === -1) return;
+                    if (/react-router-dom|\/react-dom\/|\/react\//.test(id)) return "react-vendor";
+                    if (id.indexOf("framer-motion") !== -1) return "framer-motion";
+                    if (id.indexOf("@radix-ui") !== -1) return "radix-ui";
+                    if (id.indexOf("@tanstack/react-query") !== -1) return "query-vendor";
+                },
+            },
+        },
+    },
 }));
