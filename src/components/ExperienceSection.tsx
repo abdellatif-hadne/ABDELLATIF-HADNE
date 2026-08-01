@@ -1,5 +1,15 @@
 import { motion } from "framer-motion";
-import { Briefcase, Heart, MapPin, CalendarDays, ExternalLink } from "lucide-react";
+import {
+  Briefcase,
+  Heart,
+  MapPin,
+  CalendarDays,
+  ExternalLink,
+  MessageCircle,
+  MessagesSquare,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 interface ExpEntry {
   title: string;
@@ -12,6 +22,7 @@ interface ExpEntry {
   skills: string[];
   logoUrl: string;
   url?: string;
+  links?: { icon: typeof Briefcase; href: string; label: string }[];
 }
 
 const experience: ExpEntry[] = [
@@ -79,6 +90,29 @@ const experience: ExpEntry[] = [
 ];
 
 const volunteering: ExpEntry[] = [
+  {
+    title: "Founder",
+    organization: "DCG Marrakech — DEF CON Group Marrakech",
+    period: "2026 – Present",
+    location: "Marrakech, Morocco",
+    description:
+      "Marrakech's hacker & cybersecurity community 🇲🇦 — Learn. Break. Build. Share. Open to all levels, always free.",
+    missions: [
+      "Red Team & Pentest",
+      "Blue Team & SOC",
+      "CTF & Challenges",
+      "Workshops & Talks",
+    ],
+    skills: ["Community Building", "Red Team", "Blue Team", "SOC", "CTF", "Workshops"],
+    logoUrl: "/logos/dcg-marrakech.png",
+    url: "https://linkedin.com/company/dcg-marrakech",
+    links: [
+      { icon: MessageCircle, href: "https://chat.whatsapp.com/JALYugMz3ljDiapXdNc25G", label: "WhatsApp" },
+      { icon: MessagesSquare, href: "https://discord.gg/Nb4T7G2hW", label: "Discord" },
+      { icon: Linkedin, href: "https://linkedin.com/company/dcg-marrakech", label: "LinkedIn" },
+      { icon: Instagram, href: "https://instagram.com/dcg_marrakech", label: "Instagram" },
+    ],
+  },
   {
     title: "Member & Event Volunteer",
     organization: "Google Developer Groups Marrakesh",
@@ -206,6 +240,25 @@ const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) =>
         </span>
       ))}
     </div>
+
+    {/* Social links */}
+    {entry.links && (
+      <div className="mt-4 flex flex-wrap gap-2 border-t border-border/60 pt-4">
+        {entry.links.map((link) => (
+          <a
+            key={link.label}
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
+            title={link.label}
+            className="grid h-8 w-8 place-items-center rounded-lg border border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <link.icon className="h-4 w-4" />
+          </a>
+        ))}
+      </div>
+    )}
   </motion.div>
 );
 
