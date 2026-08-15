@@ -100,7 +100,7 @@ const Navbar = () => {
             {/* Mobile Menu */}
             {isMobileMenuOpen && (
                     <div
-                        className="panel-in fixed inset-x-4 top-[88px] rounded-[28px] border border-border bg-background/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center gap-8 px-6 py-10"
+                        className="panel-in pointer-events-auto fixed inset-x-4 top-[88px] rounded-[28px] border border-border bg-background/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center gap-8 px-6 py-10"
                     >
                         {navLinks.map((link) => (
                             <NavLink
