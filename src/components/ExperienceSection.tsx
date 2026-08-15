@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
 import {
   Briefcase,
   Heart,
@@ -174,13 +174,8 @@ const LogoBox = ({ entry }: { entry: ExpEntry }) => (
 );
 
 const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
-    transition={{ duration: 0.45, delay: index * 0.06 }}
-    className="surface card-glow rounded-2xl p-5 sm:p-6 shadow-sm"
-  >
+  <FadeIn delay={index * 0.06}>
+    <div className="surface card-glow rounded-2xl p-5 sm:p-6 shadow-sm">
     {/* Header */}
     <div className="mb-4">
       <h4 className="text-base font-semibold leading-snug text-foreground">{entry.title}</h4>
@@ -261,7 +256,8 @@ const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) =>
         ))}
       </div>
     )}
-  </motion.div>
+    </div>
+  </FadeIn>
 );
 
 const Timeline = ({
@@ -315,20 +311,14 @@ const ExperienceSection = () => {
   return (
     <section id="experience" className="py-20 md:py-28 relative">
       <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 text-center"
-        >
+        <FadeIn className="mb-14 text-center" margin="-80px">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             My <span className="gradient-text">journey</span> so far
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
             A professional path through cybersecurity, research, and community engagement.
           </p>
-        </motion.div>
+        </FadeIn>
 
         <div className="grid grid-cols-1 gap-12 md:gap-10 lg:grid-cols-2 items-start">
           <Timeline title="Work Experience" icon={Briefcase} entries={experience} />

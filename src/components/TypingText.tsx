@@ -1,5 +1,5 @@
-import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useInView } from "@/hooks/use-perf";
 
 interface TypingTextProps {
     texts: string[];
@@ -21,8 +21,11 @@ const TypingText = ({
     const [reverse, setReverse] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
 
+    // Typing re-renders every 50-100ms; stop it once the hero is scrolled away.
+    const { ref, inView } = useInView<HTMLSpanElement>("0px");
+
     useEffect(() => {
-        if (isPaused) return;
+        if (isPaused || !inView) return;
 
         if (subIndex === texts[index].length + 1 && !reverse) {
             setIsPaused(true);
@@ -44,10 +47,10 @@ const TypingText = ({
         }, reverse ? deletingSpeed : typingSpeed);
 
         return () => clearTimeout(timeout);
-    }, [subIndex, index, reverse, texts, typingSpeed, deletingSpeed, pauseTime, isPaused]);
+    }, [subIndex, index, reverse, texts, typingSpeed, deletingSpeed, pauseTime, isPaused, inView]);
 
     return (
-        <span className={className}>
+        <span ref={ref} className={className}>
             {texts[index].substring(0, subIndex)}
             <span className="animate-pulse text-primary ml-1">|</span>
         </span>

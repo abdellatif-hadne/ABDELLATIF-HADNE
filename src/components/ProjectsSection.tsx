@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import { motion } from "framer-motion";
 import { ArrowUpRight, Github } from "lucide-react";
+import FadeIn from "./FadeIn";
 
 interface Project {
   title: string;
@@ -108,15 +108,12 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
   };
 
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-      className="group card-spotlight card-accent relative overflow-hidden flex flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
-    >
+    <FadeIn delay={(index % 3) * 0.08} className="h-full">
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="group card-spotlight card-accent relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
+      >
       {/* Header */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <div className="flex items-center gap-2.5">
@@ -167,7 +164,8 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           <span className="px-1 text-[10px] text-primary/80">+{extra}</span>
         )}
       </div>
-    </motion.div>
+      </div>
+    </FadeIn>
   );
 };
 
@@ -175,20 +173,14 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="relative py-20 md:py-28">
       <div className="container mx-auto max-w-6xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 text-center"
-        >
+        <FadeIn className="mb-14 text-center" margin="-80px">
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Things I&apos;ve <span className="gradient-text">built</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
             A selection of security tools, AI systems, and full-stack apps I&apos;ve shipped.
           </p>
-        </motion.div>
+        </FadeIn>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, i) => (

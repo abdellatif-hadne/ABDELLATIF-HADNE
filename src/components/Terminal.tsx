@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
 import { Terminal as TerminalIcon, X, Maximize2, Minimize2 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 import { posts, formatDate } from "@/data/blog";
 import {
   identity,
@@ -483,26 +482,20 @@ const Terminal = () => {
     <>
       {/* Floating Action Button */}
       <div className="fixed bottom-6 right-6 z-[70] flex flex-col items-end">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+        <button
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
-          className="surface shadow-xl flex items-center justify-center h-14 w-14 rounded-full border border-primary/35 bg-card/90 text-primary hover:text-foreground hover:bg-primary transition-all duration-300"
+          className="surface shadow-xl flex items-center justify-center h-14 w-14 rounded-full border border-primary/35 bg-card/90 text-primary transition-all duration-300 hover:scale-105 hover:text-foreground hover:bg-primary active:scale-95"
           aria-label="Toggle security command center"
         >
           <TerminalIcon className="h-6 w-6" />
-        </motion.button>
+        </button>
       </div>
 
       {/* Terminal Drawer Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, y: 50 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.9, y: 50 }}
-            transition={{ type: "spring", damping: 25, stiffness: 220 }}
-            className={`fixed z-[60] overflow-hidden rounded-2xl border border-border/80 bg-background/95 shadow-2xl backdrop-blur-xl ${
+      {isOpen && (
+          <div
+            className={`panel-in fixed z-[60] overflow-hidden rounded-2xl border border-border/80 bg-background/95 shadow-2xl backdrop-blur-xl ${
               isMaximized
                 ? "inset-4 md:inset-8"
                 : "bottom-24 right-4 left-4 md:left-auto md:w-[520px] h-[420px]"
@@ -580,9 +573,8 @@ const Terminal = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
     </>
   );
 };

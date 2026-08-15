@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
@@ -11,20 +11,14 @@ const BlogSection = () => {
   return (
     <section id="blog" className="relative py-20 md:py-28">
       <div className="container mx-auto max-w-6xl px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="mb-14 text-center"
-        >
+        <FadeIn className="mb-14 text-center" margin="-80px">
           <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Notes &amp; <span className="gradient-text">write-ups</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
             Articles on security, AI, and the things I learn along the way.
           </p>
-        </motion.div>
+        </FadeIn>
 
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {latest.map((post, i) => (

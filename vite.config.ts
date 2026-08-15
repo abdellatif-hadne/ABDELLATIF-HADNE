@@ -32,9 +32,6 @@ export default defineConfig(({ command }) => ({
                 manualChunks(id) {
                     if (id.indexOf("node_modules") === -1) return;
                     if (/react-router-dom|\/react-dom\/|\/react\//.test(id)) return "react-vendor";
-                    if (id.indexOf("framer-motion") !== -1) return "framer-motion";
-                    if (id.indexOf("@radix-ui") !== -1) return "radix-ui";
-                    if (id.indexOf("@tanstack/react-query") !== -1) return "query-vendor";
                 },
             },
         },

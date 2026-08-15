@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
 import { Mail, Phone, MapPin, Send, Loader2, Check, AlertTriangle } from "lucide-react";
 import { toast } from "sonner";
 
@@ -68,12 +68,7 @@ const ContactSection = () => {
     return (
         <section id="contact" className="py-20 md:py-28 relative">
             <div className="container mx-auto px-6 max-w-5xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.6 }}
-                >
+                <FadeIn margin="-80px">
                     <div className="text-center mb-14">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
                             Let&apos;s <span className="gradient-text">work together</span>
@@ -159,7 +154,7 @@ const ContactSection = () => {
                             </button>
                         </form>
                     </div>
-                </motion.div>
+                </FadeIn>
             </div>
         </section>
     );

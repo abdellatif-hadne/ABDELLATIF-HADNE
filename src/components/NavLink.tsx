@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 interface NavLinkProps {
     href: string;
     children: React.ReactNode;
@@ -15,10 +13,7 @@ const NavLink = ({ href, children, onClick, className = "" }: NavLinkProps) => {
             className={`font-sans text-sm text-foreground/70 hover:text-foreground transition-colors relative group ${className}`}
         >
             {children}
-            <motion.span
-                className="absolute -bottom-2 left-0 h-px w-0 bg-primary transition-all group-hover:w-full"
-                layoutId="nav-underline"
-            />
+            <span className="absolute -bottom-2 left-0 h-px w-0 bg-primary transition-all group-hover:w-full" />
         </a>
     );
 };

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
 
 const AboutSection = () => {
   return (
@@ -6,13 +6,7 @@ const AboutSection = () => {
       <div className="container mx-auto px-6 max-w-5xl">
         <div className="flex flex-col items-center gap-10 md:flex-row md:items-center md:gap-14">
           {/* Photo */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6 }}
-            className="shrink-0"
-          >
+          <FadeIn className="shrink-0" margin="-80px">
             <div className="relative mx-auto w-52 sm:w-60 md:w-72 aspect-square">
               <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-primary/30 to-[hsl(265_85%_62%)]/30 blur-2xl" />
               <div className="relative h-full w-full rounded-[1.75rem] bg-gradient-to-br from-primary to-[hsl(265_85%_62%)] p-1 shadow-xl">
@@ -24,16 +18,10 @@ const AboutSection = () => {
                 />
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
 
           {/* Text */}
-          <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-center md:text-left"
-          >
+          <FadeIn className="text-center md:text-left" delay={0.1} margin="-80px">
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               Securing the <span className="gradient-text">digital world</span>
             </h2>
@@ -51,7 +39,7 @@ const AboutSection = () => {
               cybersecurity</span> - building intelligent tools that detect anomalies, analyze
               threats, and respond to modern attacks faster than traditional approaches.
             </p>
-          </motion.div>
+          </FadeIn>
         </div>
       </div>
     </section>

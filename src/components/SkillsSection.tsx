@@ -1,4 +1,6 @@
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { useInView } from "@/hooks/use-perf";
+import FadeIn from "./FadeIn";
 
 interface Skill {
   label: string;
@@ -110,7 +112,7 @@ const skillCategories: Category[] = [
   },
 ];
 
-const SkillIcon = ({ skill }: { skill: Skill }) => {
+const SkillIcon = ({ skill, loadIcon }: { skill: Skill; loadIcon: boolean }) => {
   const handleError = (e: React.SyntheticEvent<HTMLImageElement>) => {
     const target = e.target as HTMLImageElement;
     target.style.display = "none";
@@ -132,15 +134,18 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
       className="group flex flex-col items-center gap-2.5 cursor-pointer no-underline flex-shrink-0"
     >
       <div className="skill-tile w-16 h-16 rounded-2xl flex items-center justify-center">
-        <img
-          src={skill.iconUrl}
-          alt={skill.label}
-          width={34}
-          height={34}
-          loading="lazy"
-          className="transition-transform duration-300 group-hover:scale-110"
-          onError={handleError}
-        />
+        {loadIcon && (
+          <img
+            src={skill.iconUrl}
+            alt={skill.label}
+            width={34}
+            height={34}
+            loading="lazy"
+            decoding="async"
+            className="transition-transform duration-300 group-hover:scale-110"
+            onError={handleError}
+          />
+        )}
       </div>
       <span
         className="text-[11px] text-muted-foreground group-hover:text-primary transition-colors text-center leading-tight max-w-[72px]"
@@ -161,17 +166,27 @@ const InfiniteCarousel = ({
   direction?: "left" | "right";
   speed?: number;
 }) => {
+  // Icons are only requested once the row approaches the viewport, and the
+  // animation is paused while off-screen — both matter a lot on mobile.
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const [hasLoaded, setHasLoaded] = useState(false);
+
+  useEffect(() => {
+    if (inView) setHasLoaded(true);
+  }, [inView]);
+
   // Two identical halves → translateX(-50%) loops seamlessly.
   const half = (key: string) => (
     <div className="flex gap-6 pr-6 shrink-0" aria-hidden={key === "b"}>
       {skills.map((skill, i) => (
-        <SkillIcon key={`${key}-${skill.label}-${i}`} skill={skill} />
+        <SkillIcon key={`${key}-${skill.label}-${i}`} skill={skill} loadIcon={hasLoaded} />
       ))}
     </div>
   );
 
   return (
     <div
+      ref={ref}
       className="relative overflow-hidden w-full py-2"
       style={{
         maskImage:
@@ -186,6 +201,7 @@ const InfiniteCarousel = ({
           {
             "--marquee-duration": `${speed}s`,
             "--marquee-direction": direction === "right" ? "reverse" : "normal",
+            animationPlayState: inView ? "running" : "paused",
           } as React.CSSProperties
         }
       >
@@ -200,30 +216,18 @@ const SkillsSection = () => {
   return (
     <section id="skills" className="py-20 md:py-28">
       <div className="container mx-auto px-6 max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
-        >
+        <FadeIn className="text-center mb-14" margin="-80px">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             Tools I <span className="gradient-text">build &amp; break</span> with
           </h2>
           <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
             Across offensive and defensive security, with a focus on AI-driven security.
           </p>
-        </motion.div>
+        </FadeIn>
 
         <div className="space-y-10 md:space-y-12">
           {skillCategories.map((cat, i) => (
-            <motion.div
-              key={cat.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, delay: i * 0.08 }}
-            >
+            <FadeIn key={cat.name} delay={i * 0.08}>
               {/* Category header */}
               <div className="flex items-center gap-3 mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_hsl(var(--primary))]" />
@@ -242,7 +246,7 @@ const SkillsSection = () => {
                 direction={cat.direction ?? "left"}
                 speed={Math.max(28, cat.skills.length * 2.6)}
               />
-            </motion.div>
+            </FadeIn>
           ))}
         </div>
       </div>

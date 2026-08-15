@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Twitter, Mail, Shield } from "lucide-react";
 
 import TypingText from "./TypingText";
@@ -8,32 +7,22 @@ const HeroSection = () => {
     return (
         <section className="min-h-screen flex flex-col items-center justify-center relative pt-20">
             <div className="container mx-auto px-6 text-center z-10">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                    className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-primary text-xs font-mono tracking-wide mb-8 shadow-sm"
+                <div
+                    className="pop-in surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-primary text-xs font-mono tracking-wide mb-8 shadow-sm"
                 >
                     <Shield className="w-3 h-3" />
                     CYBERSECURITY ENGINEERING STUDENT
-                </motion.div>
+                </div>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                    className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
+                <h1
+                    style={{ animationDelay: "0.1s" }}
+                    className="rise-in text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
                 >
                     Abdelhadi <span className="gradient-text">Rizki</span>
                     <span className="text-primary">.</span>
-                </motion.h1>
+                </h1>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="group"
-                >
+                <div style={{ animationDelay: "0.2s" }} className="rise-in group">
                     <p className="surface font-mono text-xs sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center max-w-full min-w-[240px] sm:min-w-[280px] md:min-w-[340px] px-4 sm:px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
                         <TypingText texts={[
                             "Blue Team / SOC Analyst",
@@ -43,26 +32,22 @@ const HeroSection = () => {
                             "Penetration Tester"
                         ]} />
                     </p>
-                </motion.div>
+                </div>
 
 
 
 
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
+                <p
+                    style={{ animationDelay: "0.3s" }}
+                    className="rise-in max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
                 >
                     Cybersecurity engineering student across offensive &amp; defensive security  from penetration testing to threat detection and SOC with a focus on AI applied to security.
-                </motion.p>
+                </p>
 
 
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4"
+                <div
+                    style={{ animationDelay: "0.4s" }}
+                    className="rise-in flex flex-col sm:flex-row items-center justify-center gap-4 w-full px-4"
                 >
                     <a
                         href="#cv"
@@ -89,24 +74,18 @@ const HeroSection = () => {
                             </a>
                         ))}
                     </div>
-                </motion.div>
+                </div>
             </div>
 
-            <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1, delay: 1 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/50"
+            <div
+                style={{ animationDelay: "1s" }}
+                className="fade-in absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/50"
             >
                 <span className="text-[10px] font-mono tracking-widest uppercase">Scroll to initiate</span>
                 <div className="w-6 h-10 rounded-full border border-primary/25 flex items-start justify-center p-2">
-                    <motion.div
-                        animate={{ y: [0, 12, 0] }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                        className="w-1 h-1 rounded-full bg-primary"
-                    />
+                    <div className="scroll-dot w-1 h-1 rounded-full bg-primary" />
                 </div>
-            </motion.div>
+            </div>
         </section>
     );
 };

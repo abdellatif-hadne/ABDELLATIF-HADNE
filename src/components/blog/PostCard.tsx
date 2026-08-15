@@ -1,16 +1,11 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, CalendarDays, Clock } from "lucide-react";
 
 import { type BlogPost, formatDate } from "../../data/blog";
+import FadeIn from "../FadeIn";
 
 const PostCard = ({ post, index = 0 }: { post: BlogPost; index?: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
-    transition={{ duration: 0.5, delay: (index % 3) * 0.08 }}
-  >
+  <FadeIn delay={(index % 3) * 0.08} className="h-full">
     <Link
       to={`/blog/${post.slug}`}
       className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-[0_12px_30px_-16px_hsl(var(--primary)/0.4)]"
@@ -52,7 +47,7 @@ const PostCard = ({ post, index = 0 }: { post: BlogPost; index?: number }) => (
         </span>
       </div>
     </Link>
-  </motion.div>
+  </FadeIn>
 );
 
 export default PostCard;

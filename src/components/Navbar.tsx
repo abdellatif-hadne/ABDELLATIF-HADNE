@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, Menu, Moon, Sun, X } from "lucide-react";
 
 import NavLink from "./NavLink";
@@ -99,14 +98,9 @@ const Navbar = () => {
             </div>
 
             {/* Mobile Menu */}
-            <AnimatePresence>
-                {isMobileMenuOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, x: "100%" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-x-4 top-[88px] rounded-[28px] border border-border bg-background/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center gap-8 px-6 py-10"
+            {isMobileMenuOpen && (
+                    <div
+                        className="panel-in fixed inset-x-4 top-[88px] rounded-[28px] border border-border bg-background/95 backdrop-blur-xl z-40 md:hidden flex flex-col items-center justify-center gap-8 px-6 py-10"
                     >
                         {navLinks.map((link) => (
                             <NavLink
@@ -137,9 +131,8 @@ const Navbar = () => {
                             <span>Resume</span>
                             <ArrowUpRight className="h-4 w-4" />
                         </a>
-                    </motion.div>
+                    </div>
                 )}
-            </AnimatePresence>
         </nav>
     );
 };

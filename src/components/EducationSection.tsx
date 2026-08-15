@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
 import { GraduationCap, CalendarDays } from "lucide-react";
 
 const education = [
@@ -32,32 +32,23 @@ const EducationSection = () => {
     return (
         <section id="education" className="py-20 md:py-28 relative">
             <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
-                <motion.div
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-80px" }}
-                    transition={{ duration: 0.6 }}
-                    className="mb-14 text-center"
-                >
+                <FadeIn className="mb-14 text-center" margin="-80px">
                     <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
                         Academic <span className="gradient-text">background</span>
                     </h2>
                     <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
                         My academic path toward cybersecurity engineering.
                     </p>
-                </motion.div>
+                </FadeIn>
 
                 {/* Timeline */}
                 <div className="relative">
                     <div className="absolute left-8 top-3 bottom-3 w-px bg-gradient-to-b from-primary/50 via-border to-transparent" />
                     <div className="space-y-6">
                         {education.map((item, idx) => (
-                            <motion.div
+                            <FadeIn
                                 key={idx}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-60px" }}
-                                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                                delay={idx * 0.08}
                                 className="relative pl-[76px] sm:pl-24"
                             >
                                 {/* Node */}
@@ -115,7 +106,7 @@ const EducationSection = () => {
                                         </div>
                                     )}
                                 </div>
-                            </motion.div>
+                            </FadeIn>
                         ))}
                     </div>
                 </div>

@@ -287,14 +287,171 @@ html {
   transform: scaleX(1);
 }
 
+/* ── Scroll reveal & entrance animations (pure CSS) ──────────
+   Replaces the JS animation runtime: the compositor handles these on its
+   own thread, so scrolling stays smooth even on low-end phones. */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.8, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-dot {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(12px);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.8s ease both;
+}
+
+.scroll-dot {
+  animation: scroll-dot 2s ease-in-out infinite;
+}
+
+.rise-in {
+  animation: rise-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.pop-in {
+  animation: pop-in 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Terminal panel open/close */
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.panel-in {
+  animation: panel-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+  .reveal {
+    transition: none;
+  }
+  .rise-in,
+  .pop-in,
+  .fade-in,
+  .panel-in,
+  .scroll-dot {
+    animation: none;
   }
   .aurora,
   .gradient-text,
   .marquee {
     animation: none;
+  }
+}
+
+/* ── Mobile performance guards ──────────────────────────────
+   Phone GPUs choke on full-screen blurred/blended layers that are
+   repainted on every frame. Keep the look, drop the cost. */
+@media (max-width: 768px) {
+  /* Animating a blur(40px) layer the size of the viewport is by far the
+     most expensive thing on the page: keep the gradients, drop both. */
+  .aurora {
+    animation: none;
+    filter: none;
+    inset: 0;
+  }
+
+  /* Full-screen noise texture with mix-blend-mode recomposites the whole
+     page on every scroll frame. */
+  .grain {
+    display: none;
+  }
+
+  /* backdrop-filter is applied to dozens of cards, pills and the navbar;
+     each one is a separate expensive pass on mobile. */
+  .surface {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: hsl(var(--card) / 0.92);
+  }
+
+  /* Hover-only decorations never fire on touch — no reason to paint them. */
+  .card-spotlight::before,
+  .card-accent::after,
+  .scanline::after {
+    display: none;
+  }
+
+  /* Long shadows and heavy transitions on scroll-heavy lists. */
+  .card-glow {
+    transition: none;
+  }
+
+  /* Same reasoning for the Tailwind blur utilities — the navbar one is the
+     worst offender since it is fixed above the whole scrolling page. */
+  .backdrop-blur-sm,
+  .backdrop-blur,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* Without the blur these panels need a more opaque background to stay
+     readable over the page content. */
+  nav > div,
+  nav > div + div {
+    background: hsl(var(--background) / 0.96);
   }
 }
 
