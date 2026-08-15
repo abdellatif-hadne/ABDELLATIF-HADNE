@@ -34,14 +34,14 @@ const certifications = [
 
 const achievements: Achievement[] = [
     {
-        title: "1st Prize IT – SKILLUP26",
+        title: "1st Prize IT - SKILLUP26",
         description: "Won the 1st IT Prize at the final competition of the 8th Summer School in Aeronautics (SKILLUP26) in Marrakech — after months of intensive mentoring, workshops and coaching with international experts.",
         icon: Trophy,
         url: "https://www.linkedin.com/posts/abdelhadi-rizki_skillup26-skillup26-skillup26-activity-7464357418823688193-ON_S",
         linkLabel: "View LinkedIn post",
     },
     {
-        title: "Security Research Recognition – SEM",
+        title: "Security Research Recognition - SEM",
         description: "Formal recognition letter from SEM for identifying and responsibly reporting a potential vulnerability, helping safeguard their digital integrity and data-protection compliance.",
         icon: ShieldCheck,
         url: "https://drive.google.com/file/d/1ybWxA-a3p5zyR32cv_yMh001xlIoAGkk/view?usp=drive_link",
@@ -58,12 +58,12 @@ const achievements: Achievement[] = [
         icon: Flag,
     },
     {
-        title: "Top 10 – Knights of the Fury CTF",
-        description: "8ème place sur 100 équipes avec S4M_Hack – 24h de challenges intensifs en cybersécurité (Web, Crypto, OSINT, Reverse, IoT…).",
+        title: "Top 10 - Knights of the Fury CTF",
+        description: "8ème place sur 100 équipes avec S4M_Hack - 24h de challenges intensifs en cybersécurité (Web, Crypto, OSINT, Reverse, IoT…).",
         icon: Trophy,
     },
     {
-        title: "Official CTF Player – SOC4M",
+        title: "Official CTF Player - SOC4M",
         description: "Active CTF player officially representing team SOC4M, participating in cybersecurity competitions and solving challenges across multiple domains.",
         icon: Flag,
     }
@@ -80,11 +80,7 @@ const CertsSection = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="text-center mb-14">
-                        <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                            CERTIFICATIONS
-                        </span>
-                        <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
                             Licenses &amp; <span className="gradient-text">achievements</span>
                         </h2>
                         <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">

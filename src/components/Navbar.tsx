@@ -36,9 +36,9 @@ const Navbar = () => {
     ];
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 px-4 pt-4 md:px-6 md:pt-5">
+        <nav className="fixed top-0 left-0 w-full z-50 px-4 pt-4 md:px-6 md:pt-5 pointer-events-none">
             <div
-                className={`mx-auto flex w-full max-w-4xl items-center justify-between rounded-[20px] border px-4 py-3 transition-all duration-300 md:px-6 ${isScrolled
+                className={`pointer-events-auto mx-auto flex w-full max-w-4xl items-center justify-between rounded-[20px] border px-4 py-3 transition-all duration-300 md:px-6 ${isScrolled
                     ? "border-border/80 bg-background/85 shadow-[0_20px_60px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
                     : "border-border/60 bg-background/72 shadow-[0_14px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl"
                     }`}

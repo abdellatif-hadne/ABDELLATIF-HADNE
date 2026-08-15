@@ -27,18 +27,20 @@ interface ExpEntry {
 
 const experience: ExpEntry[] = [
   {
-    title: "SOC Analyst Intern – SIEM Intelligence & Security Monitoring",
+    title: "Stagiaire SOC Analyst | Threat Intelligence & Incident Response",
     organization: "ARWA Medic",
-    period: "juin 2026 – Présent · 2 mois",
+    period: "juin 2026 - Présent · 2 mois",
     location: "Marrakech, Maroc",
     contract: "Stage",
+    description:
+      "Conception, déploiement et orchestration complète de l'architecture SOC/SIEM pour la protection des infrastructures de santé.",
     missions: [
-      "SIEM Intelligence enrichi par l'IA",
-      "Threat Intelligence & MITRE ATT&CK",
-      "Réponse à incident & forensics",
-      "Audit de configuration & de sécurité interne",
+      "Architecture & SIEM : Déploiement complet de la chaîne de détection et centralisation des logs.",
+      "Threat Intelligence : Interconnexion des flux IoC via MISP et intégration des API Kaspersky.",
+      "Gestion d'Incidents & SOAR : Automatisation du tri des alertes et des workflows de réponse à l'aide de TheHive, Cortex et Shuffle.",
+      "DFIR : Création des règles de détection sur-mesure et rédaction des playbooks de remédiation.",
     ],
-    skills: ["SOC", "Wazuh", "SIEM", "TheHive", "Cortex", "AI Integration", "Threat Intelligence", "MITRE ATT&CK", "Incident Response", "Digital Forensics", "Vulnerability Remediation", "Configuration Audit", "Internal Security Audit", "Security Monitoring", "Blue Team"],
+    skills: ["SOC", "SIEM", "Wazuh", "MISP", "Kaspersky API", "TheHive", "Cortex", "Shuffle", "SOAR", "Threat Intelligence", "IoC", "Incident Response", "DFIR", "Detection Engineering", "Playbooks", "Blue Team"],
     logoUrl: "/logos/ARWA_Medic.png",
     url: "https://www.arwamedic.com/",
   },
@@ -49,7 +51,7 @@ const experience: ExpEntry[] = [
     location: "Marrakech, Maroc · À distance",
     contract: "Alternance",
     description:
-      "Programme d'Immersion Professionnelle – SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad.",
+      "Programme d'Immersion Professionnelle - SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad.",
     missions: [
       "Architecture : conception de l'architecture applicative et sécurisation de l'infrastructure réseau.",
       "Gestion de Projet : application de la méthodologie Agile (KANBAN) pour le suivi des livrables techniques.",
@@ -61,7 +63,7 @@ const experience: ExpEntry[] = [
   {
     title: "Bug Bounty Hunter (Independent Researcher)",
     organization: "Bugcrowd & HackerOne",
-    period: "janv. 2026 – Présent · 4 mois",
+    period: "janv. 2026 - Présent · 4 mois",
     location: "Remote · Indépendant",
     contract: "Indépendant",
     missions: [
@@ -75,13 +77,13 @@ const experience: ExpEntry[] = [
   {
     title: "Cybersecurity CTF Player | Red Team Practice",
     organization: "TryHackMe",
-    period: "janv. 2025 – Présent · 1 an 5 mois",
+    period: "janv. 2025 - Présent · 1 an 5 mois",
     location: "Remote · Temps partiel",
     contract: "Temps partiel",
     missions: [
       "Solving CTF challenges related to web, network and privilege escalation.",
       "Practicing Red Team techniques and attack methodology.",
-      "Ranked in Gold League – Top 6%.",
+      "Ranked in Gold League - Top 6%.",
       "Hands-on labs with Linux, networking and exploitation.",
     ],
     skills: ["CTF", "Red Team", "Linux", "Networking", "Privilege Escalation", "Web Exploitation"],
@@ -92,11 +94,11 @@ const experience: ExpEntry[] = [
 const volunteering: ExpEntry[] = [
   {
     title: "Founder",
-    organization: "DCG Marrakech — DEF CON Group Marrakech",
-    period: "2026 – Present",
+    organization: "DCG Marrakech - DEF CON Group Marrakech",
+    period: "2026 - Present",
     location: "Marrakech, Morocco",
     description:
-      "Marrakech's hacker & cybersecurity community 🇲🇦 — Learn. Break. Build. Share. Open to all levels, always free.",
+      "Marrakech's hacker & cybersecurity community - Learn. Break. Build. Share. Open to all levels, always free.",
     missions: [
       "Red Team & Pentest",
       "Blue Team & SOC",
@@ -116,7 +118,7 @@ const volunteering: ExpEntry[] = [
   {
     title: "Member & Event Volunteer",
     organization: "Google Developer Groups Marrakesh",
-    period: "Dec 2025 – Present",
+    period: "Dec 2025 - Present",
     location: "Marrakesh, Morocco",
     description:
       "Active community member, volunteering at GDG flagship events including DevFest 2025 and Build With AI 2026.",
@@ -131,7 +133,7 @@ const volunteering: ExpEntry[] = [
   {
     title: "Co-Founder",
     organization: "n8n Marrakech Community",
-    period: "2026 – Present",
+    period: "2026 - Present",
     location: "Marrakesh, Morocco",
     description:
       "Member of the local n8n community focused on workflow automation and no-code / low-code tooling.",
@@ -205,7 +207,7 @@ const ExperienceCard = ({ entry, index }: { entry: ExpEntry; index: number }) =>
           {entry.location}
         </span>
         {entry.contract && (
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">
+          <span className="rounded-full px-2 py-0.5 font-medium text-primary">
             {entry.contract}
           </span>
         )}
@@ -320,11 +322,7 @@ const ExperienceSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-mono tracking-wide text-primary shadow-sm">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            EXPERIENCE
-          </span>
-          <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             My <span className="gradient-text">journey</span> so far
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">

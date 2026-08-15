@@ -1,25 +1,64 @@
 import { useState, useEffect, useRef } from "react";
 import { Terminal as TerminalIcon, X, Maximize2, Minimize2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { posts, formatDate } from "@/data/blog";
+import {
+  identity,
+  contact,
+  socials,
+  skillGroups,
+  projects,
+  experience,
+  volunteering,
+  education,
+  certifications,
+  achievements,
+  sections,
+} from "@/data/profile";
 
 interface CommandResponse {
   input: string;
   output: string | React.ReactNode;
 }
 
+/* ---------- small output primitives ---------- */
+
+const Row = ({ label, children }: { label: string; children: React.ReactNode }) => (
+  <p className="text-muted-foreground">
+    <span className="text-foreground font-semibold">{label.padEnd(12, " ")}</span>
+    {children}
+  </p>
+);
+
+const Ext = ({ href, children }: { href: string; children: React.ReactNode }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-primary underline-offset-2 hover:underline"
+  >
+    {children}
+  </a>
+);
+
+const Banner = () => (
+  <div className="space-y-1">
+    <p className="text-emerald-500 font-bold">0xRizki Secure Shell [Version 2.0.0]</p>
+    <p className="text-muted-foreground text-xs">
+      {identity.name} - {identity.role} - {identity.location}
+    </p>
+    <p className="text-muted-foreground text-xs">
+      Type <span className="text-primary font-bold">help</span> for commands, or{" "}
+      <span className="text-primary font-bold">whoami</span> to start. Tab completes, arrows recall.
+    </p>
+  </div>
+);
+
 const Terminal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isMaximized, setIsMaximized] = useState(false);
   const [history, setHistory] = useState<CommandResponse[]>([
-    {
-      input: "",
-      output: (
-        <div className="space-y-1">
-          <p className="text-emerald-500 font-bold">0xRizki Secure Shell [Version 1.2.0]</p>
-          <p className="text-muted-foreground text-xs">Type "help" to view available security commands.</p>
-        </div>
-      ),
-    },
+    { input: "", output: <Banner /> },
   ]);
   const [inputValue, setInputValue] = useState("");
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -34,6 +73,16 @@ const Terminal = () => {
     }
   }, [isOpen]);
 
+  // Escape closes the terminal, whatever has focus
+  useEffect(() => {
+    if (!isOpen) return;
+    const onEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    window.addEventListener("keydown", onEsc);
+    return () => window.removeEventListener("keydown", onEsc);
+  }, [isOpen]);
+
   useEffect(() => {
     // Scroll to bottom of terminal content on updates
     if (containerRef.current) {
@@ -41,53 +90,235 @@ const Terminal = () => {
     }
   }, [history]);
 
-  const commands: Record<string, () => string | React.ReactNode> = {
+  const totalSkills = skillGroups.reduce((n, g) => n + g.items.length, 0);
+
+  const helpEntries: [string, string][] = [
+    ["help", "Display this help menu"],
+    ["whoami", "Identity, focus and current status"],
+    ["skills [blue|red|ai]", "Security & dev toolset by domain"],
+    ["projects [name]", "Security / AI projects with repo links"],
+    ["experience", "Professional experience timeline"],
+    ["volunteering", "Communities: DCG, n8n, GDG"],
+    ["education", "Academic background"],
+    ["certs", "Certifications and issuers"],
+    ["awards", "CTF results, prizes and recognitions"],
+    ["blog", "Latest write-ups"],
+    ["contact", "Email, phone, location"],
+    ["social", "GitHub, LinkedIn, X, DCG"],
+    ["stats", "Portfolio numbers at a glance"],
+    ["neofetch", "System card"],
+    ["goto <section>", "Scroll the page to a section"],
+    ["hack", "Run a pentest simulation"],
+    ["banner", "Reprint the welcome banner"],
+    ["clear", "Clear screen buffer"],
+    ["exit", "Close the terminal"],
+  ];
+
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (!el) return false;
+    setIsOpen(false);
+    setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 200);
+    return true;
+  };
+
+  const commands: Record<string, (args: string[]) => string | React.ReactNode> = {
     help: () => (
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-1 text-xs">
-        <div><span className="text-primary font-bold">help</span> - Display this help menu</div>
-        <div><span className="text-primary font-bold">whoami</span> - Display candidate identity profile</div>
-        <div><span className="text-primary font-bold">skills</span> - List core technical and security toolset</div>
-        <div><span className="text-primary font-bold">projects</span> - View highlights of security/AI projects</div>
-        <div><span className="text-primary font-bold">neofetch</span> - System diagnostics & status info</div>
-        <div><span className="text-primary font-bold">hack</span> - Run automated pentest simulation</div>
-        <div><span className="text-primary font-bold">clear</span> - Clear screen buffer</div>
+      <div className="grid grid-cols-1 gap-x-4 gap-y-1 text-xs sm:grid-cols-2">
+        {helpEntries.map(([cmd, desc]) => (
+          <div key={cmd}>
+            <span className="font-bold text-primary">{cmd}</span>
+            <span className="text-muted-foreground"> - {desc}</span>
+          </div>
+        ))}
       </div>
     ),
+
     whoami: () => (
-      <div className="space-y-1.5 text-xs text-muted-foreground">
-        <p><span className="text-foreground font-semibold">Name:</span> Abdelhadi Rizki</p>
-        <p><span className="text-foreground font-semibold">Role:</span> Cybersecurity Engineering Student</p>
-        <p><span className="text-foreground font-semibold">Specialization:</span> AI Applied to Security | Offensive & Defensive security operations</p>
-        <p><span className="text-foreground font-semibold">Location:</span> Marrakech, Morocco</p>
-        <p><span className="text-foreground font-semibold">Affiliations:</span> FSTG Marrakech, GDG Marrakesh Volunteer, n8n Marrakech Community Co-Founder</p>
+      <div className="space-y-1 text-xs">
+        <Row label="name">{identity.name} ({identity.handle})</Row>
+        <Row label="role">{identity.role}</Row>
+        <Row label="focus">{identity.focus}</Row>
+        <Row label="school">{identity.school}</Row>
+        <Row label="location">{identity.location}</Row>
+        <Row label="languages">{identity.languages.join(", ")}</Row>
+        <Row label="status">
+          <span className="text-emerald-500">{identity.status}</span>
+        </Row>
       </div>
     ),
-    skills: () => (
+
+    skills: (args) => {
+      const filter = args[0];
+      const groups = filter
+        ? skillGroups.filter((g) => g.key === filter || g.label.toLowerCase().includes(filter))
+        : skillGroups;
+
+      if (groups.length === 0) {
+        return `Unknown category "${filter}". Try: skills blue | skills red | skills ai`;
+      }
+
+      return (
+        <div className="space-y-2 text-xs">
+          {groups.map((g) => (
+            <div key={g.key}>
+              <p className={`font-semibold ${g.color}`}>
+                [{g.label}] ({g.items.length})
+              </p>
+              <p className="text-muted-foreground">{g.items.join(" · ")}</p>
+            </div>
+          ))}
+          {!filter && (
+            <p className="text-muted-foreground/70">
+              {totalSkills} entries. Narrow with: skills blue | skills red | skills ai
+            </p>
+          )}
+        </div>
+      );
+    },
+
+    projects: (args) => {
+      const q = args.join(" ").toLowerCase();
+      const list = q ? projects.filter((p) => p.name.toLowerCase().includes(q)) : projects;
+
+      if (list.length === 0) return `No project matching "${q}". Type "projects" to list them all.`;
+
+      return (
+        <div className="space-y-2 text-xs">
+          {list.map((p, i) => (
+            <div key={p.name}>
+              <p>
+                <span className="font-bold text-primary">
+                  {String(i + 1).padStart(2, "0")}. {p.name}
+                </span>
+                <span className="text-muted-foreground/70"> [{p.stack}]</span>
+              </p>
+              <p className="text-muted-foreground">{p.desc}</p>
+              <Ext href={p.url}>{p.url.replace("https://", "")}</Ext>
+            </div>
+          ))}
+        </div>
+      );
+    },
+
+    experience: () => (
       <div className="space-y-2 text-xs">
-        <p><span className="text-emerald-400 font-semibold">[Blue Team]:</span> SIEM (Wazuh, Splunk, Elastic SIEM), Threat Detection, MITRE ATT&CK, Grafana</p>
-        <p><span className="text-rose-400 font-semibold">[Offensive]:</span> Pentesting, Burp Suite, Metasploit, Vulnerability Research, Bug Bounty</p>
-        <p><span className="text-cyan-400 font-semibold">[AI & Dev]:</span> Python, PyTorch, Deep Learning, FastAPI, React, Node.js, Bash Scripting</p>
+        {experience.map((e) => (
+          <div key={`${e.org}-${e.role}`}>
+            <p className="font-bold text-primary">
+              {e.role} <span className="text-muted-foreground/70">@ {e.org}</span>
+            </p>
+            <p className="text-emerald-500/80">{e.period}</p>
+            <p className="text-muted-foreground">{e.note}</p>
+          </div>
+        ))}
       </div>
     ),
-    projects: () => (
+
+    volunteering: () => (
       <div className="space-y-2 text-xs">
-        <div>
-          <p className="text-primary font-bold">1. PentAI</p>
-          <p className="text-muted-foreground">AI-powered security automation platform for recon & workflows.</p>
-        </div>
-        <div>
-          <p className="text-primary font-bold">2. oneSec</p>
-          <p className="text-muted-foreground">Interactive CLI tool suite manager installer in Bash.</p>
-        </div>
-        <div>
-          <p className="text-primary font-bold">3. NeuroScan AI</p>
-          <p className="text-muted-foreground">Brain tumor detection from MRI images with PyTorch & React.</p>
-        </div>
+        {volunteering.map((e) => (
+          <div key={e.org}>
+            <p className="font-bold text-primary">
+              {e.role} <span className="text-muted-foreground/70">@ {e.org}</span>
+            </p>
+            <p className="text-emerald-500/80">{e.period}</p>
+            <p className="text-muted-foreground">{e.note}</p>
+          </div>
+        ))}
       </div>
     ),
+
+    education: () => (
+      <div className="space-y-2 text-xs">
+        {education.map((e) => (
+          <div key={e.org}>
+            <p className="font-bold text-primary">{e.role}</p>
+            <p className="text-muted-foreground">
+              {e.org} <span className="text-emerald-500/80">({e.period})</span>
+            </p>
+            <p className="text-muted-foreground/80">{e.note}</p>
+          </div>
+        ))}
+      </div>
+    ),
+
+    certs: () => (
+      <div className="space-y-1 text-xs">
+        {certifications.map((c) => (
+          <p key={c.name} className="text-muted-foreground">
+            <span className="text-emerald-500">[✓]</span>{" "}
+            <span className="text-foreground">{c.name}</span> - {c.issuer}{" "}
+            <span className="text-muted-foreground/60">({c.date})</span>
+          </p>
+        ))}
+        <p className="text-muted-foreground/70 pt-1">
+          {certifications.length} certifications - run "goto certs" for the full list.
+        </p>
+      </div>
+    ),
+
+    awards: () => (
+      <div className="space-y-1.5 text-xs">
+        {achievements.map((a) => (
+          <div key={a.name}>
+            <p className="font-semibold text-amber-400">★ {a.name}</p>
+            <p className="text-muted-foreground">{a.detail}</p>
+          </div>
+        ))}
+      </div>
+    ),
+
+    blog: () => (
+      <div className="space-y-2 text-xs">
+        {posts.map((p) => (
+          <div key={p.slug}>
+            <p className="font-bold text-primary">{p.title}</p>
+            <p className="text-muted-foreground/70">
+              {formatDate(p.date)} · {p.readingTime} · {p.category}
+            </p>
+            <p className="text-muted-foreground">{p.excerpt}</p>
+          </div>
+        ))}
+        <p className="text-muted-foreground/70">Run "goto blog" to open the blog section.</p>
+      </div>
+    ),
+
+    contact: () => (
+      <div className="space-y-1 text-xs">
+        {contact.map((c) => (
+          <Row key={c.label} label={c.label}>
+            <Ext href={c.href}>{c.value}</Ext>
+          </Row>
+        ))}
+        <p className="pt-1 text-emerald-500">{identity.status}</p>
+      </div>
+    ),
+
+    social: () => (
+      <div className="space-y-1 text-xs">
+        {socials.map((s) => (
+          <Row key={s.label} label={s.label}>
+            <Ext href={s.href}>{s.value}</Ext>
+          </Row>
+        ))}
+      </div>
+    ),
+
+    stats: () => (
+      <div className="space-y-1 text-xs">
+        <Row label="projects">{projects.length} public repositories</Row>
+        <Row label="skills">{totalSkills} tools & techniques across {skillGroups.length} domains</Row>
+        <Row label="experience">{experience.length} roles ({volunteering.length} communities)</Row>
+        <Row label="certs">{certifications.length} certifications</Row>
+        <Row label="awards">{achievements.length} results & recognitions</Row>
+        <Row label="posts">{posts.length} write-ups published</Row>
+      </div>
+    ),
+
     neofetch: () => (
-      <div className="flex gap-4 items-start font-mono text-xs leading-tight">
-        <div className="text-primary shrink-0 whitespace-pre">
+      <div className="flex items-start gap-4 font-mono text-xs leading-tight">
+        <div className="shrink-0 whitespace-pre text-primary">
 {`   /\\
   /  \\
  /\\  /\\
@@ -98,46 +329,111 @@ const Terminal = () => {
    \\/`}
         </div>
         <div className="space-y-0.5">
-          <p className="text-primary font-bold">rizki@0xrizki-secure-node</p>
+          <p className="font-bold text-primary">rizki@0xrizki-secure-node</p>
           <p>-------------------------</p>
-          <p><span className="text-emerald-500 font-semibold">OS:</span> RizkiOS v1.2.0 (amd64)</p>
-          <p><span className="text-emerald-500 font-semibold">Shell:</span> antigravity-zsh v3.5</p>
-          <p><span className="text-emerald-500 font-semibold">Uptime:</span> 1337 mins</p>
-          <p><span className="text-emerald-500 font-semibold">CPU:</span> Neural Cortex (8 cores)</p>
-          <p><span className="text-emerald-500 font-semibold">RAM:</span> 32 GB / 64 GB</p>
-          <p><span className="text-emerald-500 font-semibold">Security:</span> Firewalls Online | Wazuh Connected</p>
+          <p><span className="font-semibold text-emerald-500">User:</span> {identity.name}</p>
+          <p><span className="font-semibold text-emerald-500">Role:</span> {identity.role}</p>
+          <p><span className="font-semibold text-emerald-500">Base:</span> {identity.location}</p>
+          <p><span className="font-semibold text-emerald-500">Stack:</span> Wazuh · MISP · TheHive · Python · PyTorch</p>
+          <p><span className="font-semibold text-emerald-500">Skills:</span> {totalSkills} tracked</p>
+          <p><span className="font-semibold text-emerald-500">Repos:</span> {projects.length} public</p>
+          <p><span className="font-semibold text-emerald-500">Certs:</span> {certifications.length} verified</p>
+          <p><span className="font-semibold text-emerald-500">Shell:</span> 0xRizki secure shell v2.0.0</p>
         </div>
       </div>
     ),
-    hack: () => {
-      return (
-        <div className="space-y-1 text-xs font-mono text-rose-500 animate-pulse">
-          <p>[+] Initializing penetration test sequence...</p>
-          <p>[+] Scanning active nodes in network segment 192.168.1.0/24...</p>
-          <p>[+] Found target: 192.168.1.45 (Port 80/http open)</p>
-          <p>[+] Exploiting vulnerable web application parameters...</p>
-          <p>[+] Extracting shadow hash credentials... [SUCCESS]</p>
-          <p className="text-emerald-500 font-bold font-mono mt-1">[!] ROOT PRIVILEGES GAINED. CONTROL ESTABLISHED.</p>
-        </div>
-      );
-    }
+
+    goto: (args) => {
+      const target = args[0];
+      if (!target) {
+        return `Usage: goto <section>. Available: ${sections.map((s) => s.label).join(", ")}`;
+      }
+      const match = sections.find((s) => s.id === target || s.label.startsWith(target));
+      if (!match || !scrollTo(match.id)) {
+        return `Unknown section "${target}". Available: ${sections.map((s) => s.label).join(", ")}`;
+      }
+      return `Navigating to #${match.id}...`;
+    },
+
+    hack: () => (
+      <div className="space-y-1 font-mono text-xs text-rose-500">
+        <p>[+] Initializing penetration test sequence...</p>
+        <p>[+] Scanning network segment 192.168.1.0/24 (nmap -sV)...</p>
+        <p>[+] Target found: 192.168.1.45 - 80/http, 22/ssh open</p>
+        <p>[+] Fuzzing web parameters with Burp Suite Intruder...</p>
+        <p>[+] SQL injection confirmed on /login?user=</p>
+        <p>[+] Dumping credentials, cracking hashes with hashcat...</p>
+        <p>[+] Privilege escalation via misconfigured SUID binary...</p>
+        <p className="mt-1 font-bold text-emerald-500">[!] ROOT ACCESS GAINED - findings logged to report.md</p>
+        <p className="text-muted-foreground/60">(simulation only - authorized testing mindset)</p>
+      </div>
+    ),
+
+    banner: () => <Banner />,
+
+    exit: () => {
+      setIsOpen(false);
+      return "Session closed. See you soon.";
+    },
   };
 
+  // aliases
+  const aliases: Record<string, string> = {
+    about: "whoami",
+    id: "whoami",
+    tools: "skills",
+    stack: "skills",
+    work: "experience",
+    exp: "experience",
+    xp: "experience",
+    edu: "education",
+    school: "education",
+    certifications: "certs",
+    achievements: "awards",
+    ctf: "awards",
+    posts: "blog",
+    articles: "blog",
+    links: "social",
+    open: "goto",
+    cd: "goto",
+    quit: "exit",
+    "?": "help",
+  };
+
+  const resolve = (name: string) => aliases[name] ?? name;
+
   const handleCommand = (cmdStr: string) => {
-    const trimmed = cmdStr.trim().toLowerCase();
-    
-    if (trimmed === "clear") {
+    const trimmed = cmdStr.trim();
+    const [rawName, ...args] = trimmed.toLowerCase().split(/\s+/);
+    const name = resolve(rawName);
+
+    if (name === "clear") {
       setHistory([]);
+      setCommandHistory((prev) => [cmdStr, ...prev.filter((c) => c !== cmdStr)]);
+      setHistoryIndex(-1);
       return;
     }
 
     let output: string | React.ReactNode = "";
     if (trimmed === "") {
       output = "";
-    } else if (commands[trimmed]) {
-      output = commands[trimmed]();
+    } else if (name === "sudo") {
+      output = (
+        <p className="text-xs text-amber-400">
+          Nice try. This node runs least privilege - even for its owner.
+        </p>
+      );
+    } else if (name === "ls") {
+      output = (
+        <p className="text-xs text-muted-foreground">
+          {sections.map((s) => s.label).join("  ")}
+          <span className="block text-muted-foreground/60">Use "goto &lt;section&gt;" to jump.</span>
+        </p>
+      );
+    } else if (commands[name]) {
+      output = commands[name](args);
     } else {
-      output = `Command not recognized: "${trimmed}". Type "help" for a list of commands.`;
+      output = `Command not recognized: "${rawName}". Type "help" for a list of commands.`;
     }
 
     setHistory((prev) => [...prev, { input: cmdStr, output }]);
@@ -170,17 +466,23 @@ const Terminal = () => {
       }
     } else if (e.key === "Tab") {
       e.preventDefault();
-      const match = Object.keys(commands).find((c) => c.startsWith(inputValue));
+      const typed = inputValue.trim().toLowerCase();
+      if (!typed || typed.includes(" ")) return;
+      const pool = [...Object.keys(commands), "clear", "ls", ...Object.keys(aliases)];
+      const match = pool.find((c) => c.startsWith(typed));
       if (match) {
         setInputValue(match);
       }
+    } else if (e.key === "l" && e.ctrlKey) {
+      e.preventDefault();
+      setHistory([]);
     }
   };
 
   return (
     <>
       {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
+      <div className="fixed bottom-6 right-6 z-[70] flex flex-col items-end">
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -200,10 +502,10 @@ const Terminal = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 50 }}
             transition={{ type: "spring", damping: 25, stiffness: 220 }}
-            className={`fixed z-40 overflow-hidden rounded-2xl border border-border/80 bg-background/95 shadow-2xl backdrop-blur-xl ${
+            className={`fixed z-[60] overflow-hidden rounded-2xl border border-border/80 bg-background/95 shadow-2xl backdrop-blur-xl ${
               isMaximized
                 ? "inset-4 md:inset-8"
-                : "bottom-24 right-4 left-4 md:left-auto md:w-[480px] h-[380px]"
+                : "bottom-24 right-4 left-4 md:left-auto md:w-[520px] h-[420px]"
             } flex flex-col`}
           >
             {/* Terminal Top Control Bar */}
@@ -270,7 +572,7 @@ const Terminal = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   onKeyDown={handleKeyDown}
                   className="flex-1 bg-transparent border-none outline-none font-mono text-emerald-400 caret-emerald-400 placeholder:text-muted-foreground/30 focus:ring-0 p-0 text-xs"
-                  placeholder="Type here..."
+                  placeholder="help · whoami · skills · projects · contact"
                   autoComplete="off"
                   autoCorrect="off"
                   autoCapitalize="off"

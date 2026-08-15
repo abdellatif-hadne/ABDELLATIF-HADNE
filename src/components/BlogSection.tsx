@@ -18,11 +18,7 @@ const BlogSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wide text-primary shadow-sm">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            BLOG
-          </span>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Notes &amp; <span className="gradient-text">write-ups</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">

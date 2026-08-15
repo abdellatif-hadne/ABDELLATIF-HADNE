@@ -123,12 +123,6 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           <h3 className="text-base font-semibold text-foreground transition-colors group-hover:text-primary">
             {project.title}
           </h3>
-          {project.live && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-              Live
-            </span>
-          )}
         </div>
         <div className="flex shrink-0 items-center gap-2 text-muted-foreground">
           {project.live && (
@@ -188,11 +182,7 @@ const ProjectsSection = () => {
           transition={{ duration: 0.6 }}
           className="mb-14 text-center"
         >
-          <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 font-mono text-xs tracking-wide text-primary shadow-sm">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            PROJECTS
-          </span>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-foreground md:text-5xl">
+          <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-5xl">
             Things I&apos;ve <span className="gradient-text">built</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">

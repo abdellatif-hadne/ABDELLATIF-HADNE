@@ -207,11 +207,7 @@ const SkillsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-            SKILLS &amp; EXPERTISE
-          </span>
-          <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
             Tools I <span className="gradient-text">build &amp; break</span> with
           </h2>
           <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">

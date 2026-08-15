@@ -4,24 +4,24 @@ import { GraduationCap, CalendarDays } from "lucide-react";
 const education = [
     {
         school: "Faculté des Sciences et Techniques Gueliz - Marrakech",
-        degree: "Engineering Degree – IT Security (Sécurité d'Information Technologique)",
-        period: "2024 – 2027",
+        degree: "Engineering Degree - IT Security (Sécurité d'Information Technologique)",
+        period: "2024 - 2027",
         tags: ["Ethical Hacking & Security Testing", "Cryptography & Network Security", "Cloud Security & DevOps", "Cyber Incident Management & Digital Forensics", "Network and system security", "Mobile programming", "Java programming and security", "IT security and cyber law", "Back-end & front-end web development", "Project and Business Management", "Application and service security", "Cloud security and blockchain", "IT project management and agile methodologies", "Systems and Network Administration", "Security of banking payment systems and industrial information systems"],
         logo: "/fst_marrakech_logo.png",
         link: "https://www.fstg-marrakech.ac.ma/",
     },
     {
         school: "FSTE - Errachidia",
-        degree: "DEUST – Math, Computer Science & Physics",
-        period: "2022 – 2024",
+        degree: "DEUST - Math, Computer Science & Physics",
+        period: "2022 - 2024",
         tags: ["Programming & Databases"],
         logo: "/fst_errachidia_logo.png",
         link: "https://fst-maroc.com/school/6",
     },
     {
         school: "Lycée Abi El Kacem",
-        degree: "Baccalauréat – Physical Sciences (Mention Bien)",
-        period: "2021 – 2022",
+        degree: "Baccalauréat - Physical Sciences (Mention Bien)",
+        period: "2021 - 2022",
         tags: [],
         logo: "/high_school_logo.png",
         link: "#",
@@ -39,11 +39,7 @@ const EducationSection = () => {
                     transition={{ duration: 0.6 }}
                     className="mb-14 text-center"
                 >
-                    <span className="surface inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-mono tracking-wide text-primary shadow-sm">
-                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-                        EDUCATION
-                    </span>
-                    <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                    <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
                         Academic <span className="gradient-text">background</span>
                     </h2>
                     <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
@@ -98,7 +94,7 @@ const EducationSection = () => {
                                                 {item.school}
                                             </h3>
                                         </a>
-                                        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                                        <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium text-primary">
                                             <CalendarDays className="h-3.5 w-3.5" />
                                             {item.period}
                                         </span>

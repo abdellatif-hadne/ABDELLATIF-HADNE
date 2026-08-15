@@ -75,11 +75,7 @@ const ContactSection = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="text-center mb-14">
-                        <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
-                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                            CONTACT
-                        </span>
-                        <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+                        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
                             Let&apos;s <span className="gradient-text">work together</span>
                         </h2>
                         <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">

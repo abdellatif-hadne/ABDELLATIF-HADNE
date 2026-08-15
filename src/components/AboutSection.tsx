@@ -23,11 +23,6 @@ const AboutSection = () => {
                   className="h-full w-full rounded-[1.6rem] object-cover"
                 />
               </div>
-              {/* Availability badge */}
-              <div className="surface absolute -bottom-3 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11px] font-medium text-foreground shadow-md">
-                <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                Open to internships
-              </div>
             </div>
           </motion.div>
 
@@ -39,12 +34,7 @@ const AboutSection = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-center md:text-left"
           >
-            <span className="surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono tracking-wide text-primary shadow-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              ABOUT ME
-            </span>
-
-            <h2 className="mt-6 text-3xl md:text-5xl font-bold tracking-tight text-foreground">
+            <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
               Securing the <span className="gradient-text">digital world</span>
             </h2>
 
