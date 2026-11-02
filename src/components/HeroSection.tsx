@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Twitter, Mail, Shield } from "lucide-react";
+import { ArrowDown, Linkedin, Mail, Shield } from "lucide-react";
 
 import TypingText from "./TypingText";
 
@@ -11,25 +11,25 @@ const HeroSection = () => {
                     className="pop-in surface inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-primary text-xs font-mono tracking-wide mb-8 shadow-sm"
                 >
                     <Shield className="w-3 h-3" />
-                    CYBERSECURITY ENGINEERING STUDENT
+                    SUPPLY CHAIN & LOGISTICS
                 </div>
 
                 <h1
                     style={{ animationDelay: "0.1s" }}
                     className="rise-in text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold mb-6 tracking-tight"
                 >
-                    Abdelhadi <span className="gradient-text">Rizki</span>
+                    Abdellatif <span className="gradient-text">Hadne</span>
                     <span className="text-primary">.</span>
                 </h1>
 
                 <div style={{ animationDelay: "0.2s" }} className="rise-in group">
                     <p className="surface font-mono text-xs sm:text-base md:text-lg text-muted-foreground mb-5 inline-flex items-center justify-center max-w-full min-w-[240px] sm:min-w-[280px] md:min-w-[340px] px-4 sm:px-5 py-1.5 md:py-2 rounded-full whitespace-nowrap shadow-sm">
                         <TypingText texts={[
-                            "Blue Team / SOC Analyst",
-                            "AI for Cybersecurity",
-                            "Threat Detection Engineer",
-                            "Security Researcher",
-                            "Penetration Tester"
+                            "Supply Chain & Logistics",
+                            "Analytics & Performance",
+                            "Power BI & KPI Reporting",
+                            "Transport & Fleet Planning",
+                            "Stock & Warehouse Management"
                         ]} />
                     </p>
                 </div>
@@ -41,7 +41,7 @@ const HeroSection = () => {
                     style={{ animationDelay: "0.3s" }}
                     className="rise-in max-w-2xl mx-auto text-muted-foreground/80 leading-relaxed mb-10 text-sm md:text-lg"
                 >
-                    Cybersecurity engineering student across offensive &amp; defensive security  from penetration testing to threat detection and SOC with a focus on AI applied to security.
+                    Graduate of a Master's in Logistics Management from ENCG Marrakech, looking for an opportunity in Supply Chain / Logistics. Available immediately, mobile across Morocco.
                 </p>
 
 
@@ -58,10 +58,8 @@ const HeroSection = () => {
                     </a>
                     <div className="flex items-center justify-center gap-3">
                         {[
-                            { icon: Github, href: "https://github.com/Rizki033" },
-                            { icon: Linkedin, href: "https://www.linkedin.com/in/abdelhadi-rizki/" },
-                            { icon: Twitter, href: "https://x.com/Rizki40109" },
-                            { icon: Mail, href: "mailto:rizkiabdelhadi4@gmail.com" },
+                            { icon: Linkedin, href: "https://www.linkedin.com/in/abdellatif-hadne-396a782b4/" },
+                            { icon: Mail, href: "mailto:abdellatif.hadne@gmail.com" },
                         ].map((social, i) => (
                             <a
                                 key={i}

@@ -9,7 +9,7 @@ import { posts } from "../data/blog";
 const BlogPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
-    document.title = "Blog | Abdelhadi Rizki";
+    document.title = "Blog | Abdellatif Hadne";
   }, []);
 
   return (
@@ -37,7 +37,7 @@ const BlogPage = () => {
             Notes &amp; <span className="gradient-text">write-ups</span>
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-            Articles on security, AI, and the things I learn along the way.
+            Articles on Supply Chain, logistics, data and the things I learn along the way.
           </p>
         </header>
 

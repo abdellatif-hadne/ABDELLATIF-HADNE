@@ -10,61 +10,36 @@ interface Achievement {
 }
 
 const issuerLabels: Record<string, string> = {
-    "TryHackMe": "THM",
-    "SOCRadar": "SOC",
-    "Proofpoint": "PP",
-    "Cisco": "CSC",
-    "Cybrary": "CBR",
-    "Cisco Networking Academy": "CSC",
+    "Langue": "LNG",
 };
 
 const certifications = [
-    { title: "Ethical Hacker", issuer: "Cisco", date: "May 2026", url: "https://www.credly.com/badges/06ec8462-385d-4989-9db7-f11fba15681a/public_url" },
-    { title: "Jr Penetration Tester", issuer: "TryHackMe", date: "Feb 2026", url: "https://tryhackme.com/certificate/THM-S3LRB8724U" },
-    { title: "Ransomware Defense Masterclass", issuer: "SOCRadar", date: "Jul 2025", url: "https://credsverse.com/credentials/dc6384e6-2920-46ff-b2f1-0aef9ab1c826?preview=1" },
-    { title: "Mastering Cyber Threat Intelligence for SOC Analysts", issuer: "SOCRadar", date: "Jul 2025", url: "https://credsverse.com/credentials/3b0c8b7f-223f-4f93-a1c9-c3e083141e42?preview=2" },
-    { title: "Certified Email Authentication Specialist", issuer: "Proofpoint", date: "Apr 2025", url: "https://www.credly.com/badges/68b5fe7a-e1af-41ba-962f-022a414bf4a2/linked_in_profile" },
-    { title: "Introduction to Cybersecurity", issuer: "Cisco", date: "Mar 2025", url: "https://www.credly.com/badges/7b687211-0909-4ba1-943a-875f70f56ea2/linked_in_profile" },
-    { title: "CCNA: Automation and Programmability", issuer: "Cybrary", date: "Feb 2025", url: "https://app.cybrary.it/profile/CooperativeMockingbird3528?tab=badges" },
-    { title: "Python Essentials 1", issuer: "Cisco", date: "Jan 2025", url: "https://www.credly.com/badges/b0164192-1158-42f7-a33e-e479b31fbdfb/linked_in_profile" },
-    { title: "Python", issuer: "Cisco Networking Academy", date: "Sep 2024", url: "" },
-    { title: "Pre Security", issuer: "TryHackMe", date: "Nov 2024", url: "" },
-    { title: "Introduction to Cyber Security", issuer: "TryHackMe", date: "Nov 2024", url: "" },
+    { title: "Tamazight", issuer: "Langue", date: "Maternelle", url: "" },
+    { title: "Arabe", issuer: "Langue", date: "Courant", url: "" },
+    { title: "Français", issuer: "Langue", date: "Courant", url: "" },
+    { title: "Anglais", issuer: "Langue", date: "Courant", url: "" },
+    { title: "Espagnol", issuer: "Langue", date: "Débutant", url: "" },
 ];
 
 const achievements: Achievement[] = [
     {
-        title: "1st Prize IT - SKILLUP26",
-        description: "Won the 1st IT Prize at the final competition of the 8th Summer School in Aeronautics (SKILLUP26) in Marrakech — after months of intensive mentoring, workshops and coaching with international experts.",
+        title: "Master en Management Logistique - ENCG Marrakech",
+        description: "Diplômé en 2026, à la recherche d'une opportunité en Supply Chain / Logistique. Disponible immédiatement, mobile sur tout le Maroc.",
         icon: Trophy,
-        url: "https://www.linkedin.com/posts/abdelhadi-rizki_skillup26-skillup26-skillup26-activity-7464357418823688193-ON_S",
-        linkLabel: "View LinkedIn post",
     },
     {
-        title: "Security Research Recognition - SEM",
-        description: "Formal recognition letter from SEM for identifying and responsibly reporting a potential vulnerability, helping safeguard their digital integrity and data-protection compliance.",
+        title: "Baccalauréat - Mention Très Bien",
+        description: "Sciences de Gestion Comptable.",
         icon: ShieldCheck,
-        url: "https://drive.google.com/file/d/1ybWxA-a3p5zyR32cv_yMh001xlIoAGkk/view?usp=drive_link",
-        linkLabel: "View recognition letter",
     },
     {
-        title: "1st Place Gold League",
-        description: "Top 6% worldwide on TryHackMe",
-        icon: Trophy,
-    },
-    {
-        title: "Natas CTF Complete",
-        description: "All 33 levels completed on OverTheWire",
+        title: "Projet PFE - Novares",
+        description: "Approche BI / Control Tower pour améliorer la synchronisation inter-services et le pilotage de la performance logistique.",
         icon: Flag,
     },
     {
-        title: "Top 10 - Knights of the Fury CTF",
-        description: "8ème place sur 100 équipes avec S4M_Hack - 24h de challenges intensifs en cybersécurité (Web, Crypto, OSINT, Reverse, IoT…).",
-        icon: Trophy,
-    },
-    {
-        title: "Official CTF Player - SOC4M",
-        description: "Active CTF player officially representing team SOC4M, participating in cybersecurity competitions and solving challenges across multiple domains.",
+        title: "Soft skills",
+        description: "Proactivité, adaptabilité, communication, travail en équipe, autonomie, organisation, initiative, distance émotionnelle.",
         icon: Flag,
     }
 ];
@@ -138,10 +113,10 @@ const CertsSection = () => {
                 <FadeIn>
                     <div className="text-center mb-14">
                         <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground">
-                            Licenses &amp; <span className="gradient-text">achievements</span>
+                            Languages &amp; <span className="gradient-text">highlights</span>
                         </h2>
                         <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
-                            Certifications, competitions, and recognitions across security &amp; AI.
+                            Languages, academic distinctions and soft skills that complete the professional path.
                         </p>
                     </div>
                 </FadeIn>
@@ -155,7 +130,7 @@ const CertsSection = () => {
 
                 {/* Achievements */}
                 <h3 className="mb-5 font-mono text-base font-bold text-foreground">
-                    <span className="text-primary">#</span> achievements
+                    <span className="text-primary">#</span> highlights
                 </h3>
                 <div className="grid md:grid-cols-2 gap-4 items-stretch">
                     {achievements.map((ach, i) => (

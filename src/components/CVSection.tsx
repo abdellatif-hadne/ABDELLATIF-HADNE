@@ -66,7 +66,7 @@ const CVSection = () => {
 
                         <p className="mt-4 text-base leading-relaxed text-muted-foreground">
                             Open the version that matches your context and get a clearer view of my
-                            experience, skills, education, and cybersecurity background.
+                            experience, skills, education, and Supply Chain &amp; logistics background.
                         </p>
                     </div>
 

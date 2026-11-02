@@ -5,10 +5,6 @@ import {
   MapPin,
   CalendarDays,
   ExternalLink,
-  MessageCircle,
-  MessagesSquare,
-  Linkedin,
-  Instagram,
 } from "lucide-react";
 
 interface ExpEntry {
@@ -27,123 +23,115 @@ interface ExpEntry {
 
 const experience: ExpEntry[] = [
   {
-    title: "Stagiaire SOC Analyst | Threat Intelligence & Incident Response",
-    organization: "ARWA Medic",
-    period: "juin 2026 - Présent · 2 mois",
-    location: "Marrakech, Maroc",
+    title: "Stagiaire PFE — Business Intelligence & Logistique",
+    organization: "Novares",
+    period: "février 2026 - juin 2026 · 5 mois",
+    location: "Kénitra, Maroc",
+    contract: "Stage PFE",
+    description:
+      "Amélioration de la synchronisation entre les services de la Supply Chain.",
+    missions: [
+      "Analyse des processus logistiques.",
+      "Conception de tableaux de bord Power BI.",
+      "Suivi des KPI Supply Chain.",
+      "Automatisation du reporting logistique.",
+      "Analyse de la performance logistique.",
+      "Proposition d'une approche BI / Control Tower.",
+    ],
+    skills: ["Approvisionnement", "Planification", "Relation client", "Stock / magasin", "Transport / expédition", "Import / export", "Power BI", "KPI", "Control Tower"],
+    logoUrl: "/logos/novares.jpg",
+    url: "https://www.novares.com/",
+  },
+  {
+    title: "Dispatcher Transport & Logistique",
+    organization: "Afriquia SMDC",
+    period: "juillet 2025 - août 2025 · 2 mois",
+    location: "Maroc",
     contract: "Stage",
-    description:
-      "Conception, déploiement et orchestration complète de l'architecture SOC/SIEM pour la protection des infrastructures de santé.",
     missions: [
-      "Architecture & SIEM : Déploiement complet de la chaîne de détection et centralisation des logs.",
-      "Threat Intelligence : Interconnexion des flux IoC via MISP et intégration des API Kaspersky.",
-      "Gestion d'Incidents & SOAR : Automatisation du tri des alertes et des workflows de réponse à l'aide de TheHive, Cortex et Shuffle.",
-      "DFIR : Création des règles de détection sur-mesure et rédaction des playbooks de remédiation.",
+      "Planification et organisation des tournées de transport.",
+      "Suivi de la flotte.",
+      "Coordination avec les chauffeurs.",
+      "Analyse des performances du transport.",
+      "Reporting opérationnel.",
+      "Contribution à l'optimisation des opérations logistiques.",
     ],
-    skills: ["SOC", "SIEM", "Wazuh", "MISP", "Kaspersky API", "TheHive", "Cortex", "Shuffle", "SOAR", "Threat Intelligence", "IoC", "Incident Response", "DFIR", "Detection Engineering", "Playbooks", "Blue Team"],
-    logoUrl: "/logos/ARWA_Medic.png",
-    url: "https://www.arwamedic.com/",
+    skills: ["Planification des tournées", "Suivi de flotte", "Coordination", "Performance transport", "Reporting"],
+    logoUrl: "/logos/afriquia.png",
+    url: "https://www.afriquia.ma/",
   },
   {
-    title: "Étudiant en Cybersécurité - Programme SkillUp IT 2026",
-    organization: "EMAN Aerospace",
-    period: "mars 2026 · 4 mois",
-    location: "Marrakech, Maroc · À distance",
-    contract: "Alternance",
-    description:
-      "Programme d'Immersion Professionnelle - SkillUp IT 2026, en partenariat avec EMAN Aerospace et l'Université Cadi Ayyad.",
+    title: "Stagiaire — Gestion de Flotte",
+    organization: "Collectivité Territoriale de Tilmi",
+    period: "juin 2025 - juillet 2025 · 2 mois",
+    location: "Tilmi, Maroc",
+    contract: "Stage",
     missions: [
-      "Architecture : conception de l'architecture applicative et sécurisation de l'infrastructure réseau.",
-      "Gestion de Projet : application de la méthodologie Agile (KANBAN) pour le suivi des livrables techniques.",
+      "Suivi de la disponibilité et de l'utilisation de la flotte.",
+      "Suivi de la maintenance préventive et corrective.",
+      "Suivi des coûts d'exploitation.",
+      "Gestion des opérations liées à la flotte.",
     ],
-    skills: ["Configuration Compliance", "ServiceNow Integration", "Analyse de vulnérabilités", "Architecture de sécurité", "Méthodologie Agile", "Gouvernance IT & Conformité"],
-    logoUrl: "/logos/eman.png",
-    url: "https://emanaerospace.com/",
+    skills: ["Gestion de flotte", "Maintenance préventive", "Maintenance corrective", "Coûts d'exploitation"],
+    logoUrl: "/logos/tilmi.png",
   },
   {
-    title: "Bug Bounty Hunter (Independent Researcher)",
-    organization: "Bugcrowd & HackerOne",
-    period: "janv. 2026 - Présent · 4 mois",
-    location: "Remote · Indépendant",
-    contract: "Indépendant",
+    title: "Stagiaire — Logistique & Gestion des Stocks",
+    organization: "SMI — Groupe Managem",
+    period: "juin 2024 - juillet 2024 · 2 mois",
+    location: "Maroc",
+    contract: "Stage",
     missions: [
-      "Conducting web application security testing through the Bugcrowd platform.",
-      "Identifying and reporting security vulnerabilities.",
-      "Practicing vulnerability research and responsible disclosure.",
+      "Réception et stockage des marchandises.",
+      "Gestion des sorties de stock.",
+      "Participation aux inventaires.",
+      "Suivi de la fiabilité des stocks.",
+      "Réorganisation de la zone de stockage.",
+      "Création de reporting automatisé avec Excel / Power BI.",
     ],
-    skills: ["Burp Suite", "Nmap", "Web Application Testing", "Vulnerability Research", "Responsible Disclosure", "XSS", "IDOR", "SQL Injection"],
-    logoUrl: "/logos/hackerone.png",
-  },
-  {
-    title: "Cybersecurity CTF Player | Red Team Practice",
-    organization: "TryHackMe",
-    period: "janv. 2025 - Présent · 1 an 5 mois",
-    location: "Remote · Temps partiel",
-    contract: "Temps partiel",
-    missions: [
-      "Solving CTF challenges related to web, network and privilege escalation.",
-      "Practicing Red Team techniques and attack methodology.",
-      "Ranked in Gold League - Top 6%.",
-      "Hands-on labs with Linux, networking and exploitation.",
-    ],
-    skills: ["CTF", "Red Team", "Linux", "Networking", "Privilege Escalation", "Web Exploitation"],
-    logoUrl: "/logos/tryhackme.png",
+    skills: ["Réception", "Stockage", "Inventaires", "Fiabilité des stocks", "Excel", "Power BI"],
+    logoUrl: "/logos/managem.png",
+    url: "https://www.managemgroup.com/",
   },
 ];
 
 const volunteering: ExpEntry[] = [
   {
-    title: "Founder",
-    organization: "DCG Marrakech - DEF CON Group Marrakech",
-    period: "2026 - Present",
-    location: "Marrakech, Morocco",
-    description:
-      "Marrakech's hacker & cybersecurity community - Learn. Break. Build. Share. Open to all levels, always free.",
+    title: "Accueil, vente & e-commerce",
+    organization: "Collectif culturel & artistique",
+    period: "2025",
+    location: "Maroc",
     missions: [
-      "Red Team & Pentest",
-      "Blue Team & SOC",
-      "CTF & Challenges",
-      "Workshops & Talks",
+      "Accueil et vente lors de festivals.",
+      "Gestion e-commerce.",
+      "Suivi des commandes.",
     ],
-    skills: ["Community Building", "Red Team", "Blue Team", "SOC", "CTF", "Workshops"],
-    logoUrl: "/logos/dcg-marrakech.png",
-    url: "https://linkedin.com/company/dcg-marrakech",
-    links: [
-      { icon: MessageCircle, href: "https://chat.whatsapp.com/JALYugMz3ljDiapXdNc25G", label: "WhatsApp" },
-      { icon: MessagesSquare, href: "https://discord.gg/Nb4T7G2hW", label: "Discord" },
-      { icon: Linkedin, href: "https://linkedin.com/company/dcg-marrakech", label: "LinkedIn" },
-      { icon: Instagram, href: "https://instagram.com/dcg_marrakech", label: "Instagram" },
-    ],
+    skills: ["Vente", "E-commerce", "Suivi des commandes"],
+    logoUrl: "/logos/collectif.png",
   },
   {
-    title: "Member & Event Volunteer",
-    organization: "Google Developer Groups Marrakesh",
-    period: "Dec 2025 - Present",
-    location: "Marrakesh, Morocco",
-    description:
-      "Active community member, volunteering at GDG flagship events including DevFest 2025 and Build With AI 2026.",
+    title: "Membre",
+    organization: "Club Graphic Design — ENCG Marrakech",
+    period: "2021 - 2023",
+    location: "Marrakech, Maroc",
     missions: [
-      "Supported event logistics, coordination and on-site experience.",
-      "Engaged with developers through talks, workshops and networking.",
+      "Coaching Illustrator.",
+      "Création graphique.",
+      "Communication visuelle.",
     ],
-    skills: ["Community", "Event Management", "Networking"],
-    logoUrl: "/logos/GDG.png",
-    url: "https://gdg.community.dev/gdg-marrakesh/",
+    skills: ["Illustrator", "Création graphique", "Communication visuelle"],
+    logoUrl: "/logos/encg.png",
   },
   {
-    title: "Co-Founder",
-    organization: "n8n Marrakech Community",
-    period: "2026 - Present",
-    location: "Marrakesh, Morocco",
-    description:
-      "Member of the local n8n community focused on workflow automation and no-code / low-code tooling.",
+    title: "Bénévole",
+    organization: "Action associative — ENCG Marrakech",
+    period: "2022 - 2023",
+    location: "Marrakech, Maroc",
     missions: [
-      "Participating in automation meetups and hands-on sessions.",
-      "Exploring n8n workflows for security and productivity automation.",
+      "Participation à des activités associatives avec des enfants.",
     ],
-    skills: ["Automation", "n8n", "Community"],
-    logoUrl: "/logos/n8n.png",
-    url: "https://luma.com/n8n-marrakech",
+    skills: ["Engagement associatif", "Travail en équipe"],
+    logoUrl: "/logos/encg.png",
   },
 ];
 
@@ -316,13 +304,13 @@ const ExperienceSection = () => {
             My <span className="gradient-text">journey</span> so far
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-            A professional path through cybersecurity, research, and community engagement.
+            Four field missions, from the warehouse to the data, building a complete view of the Supply Chain.
           </p>
         </FadeIn>
 
         <div className="grid grid-cols-1 gap-12 md:gap-10 lg:grid-cols-2 items-start">
           <Timeline title="Work Experience" icon={Briefcase} entries={experience} />
-          <Timeline title="Volunteering" icon={Heart} entries={volunteering} />
+          <Timeline title="Activities & Engagements" icon={Heart} entries={volunteering} />
         </div>
       </div>
     </section>

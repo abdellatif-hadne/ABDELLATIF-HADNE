@@ -29,7 +29,6 @@ const Navbar = () => {
         { name: "Skills", href: "/#skills" },
         { name: "Experience", href: "/#experience" },
         { name: "Projects", href: "/#projects" },
-        { name: "Blog", href: "/blog" },
         { name: "Certs", href: "/#certs" },
         { name: "Contact", href: "/#contact" },
     ];
@@ -44,7 +43,7 @@ const Navbar = () => {
             >
                 <a href="/" className="flex items-center gap-3 group shrink-0">
                     <span className="font-sans text-[1.75rem] font-semibold tracking-tight text-foreground group-hover:text-primary transition-colors">
-                        0xRizki
+                        A.Hadne
                     </span>
                     <span className="text-primary text-xl leading-none">.</span>
                 </a>

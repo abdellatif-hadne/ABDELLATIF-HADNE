@@ -16,7 +16,7 @@ const BlogSection = () => {
             Notes &amp; <span className="gradient-text">write-ups</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-            Articles on security, AI, and the things I learn along the way.
+            Articles on Supply Chain, logistics, data and the things I learn along the way.
           </p>
         </FadeIn>
 

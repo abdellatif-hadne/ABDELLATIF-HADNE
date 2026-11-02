@@ -28,9 +28,9 @@ const errorToast = () =>
     );
 
 const contactInfo = [
-    { icon: Mail, label: "Email", value: "rizkiabdelhadi4@gmail.com", href: "mailto:rizkiabdelhadi4@gmail.com" },
-    { icon: Phone, label: "Phone", value: "+212 659 030 899", href: "tel:+212659030899" },
-    { icon: MapPin, label: "Location", value: "Marrakech, Morocco", href: "https://www.google.com/maps/search/?api=1&query=Marrakech,Morocco" },
+    { icon: Mail, label: "Email", value: "abdellatif.hadne@gmail.com", href: "mailto:abdellatif.hadne@gmail.com" },
+    { icon: Phone, label: "Phone", value: "+212 6 52 10 98 10", href: "tel:+212652109810" },
+    { icon: MapPin, label: "Location", value: "Morocco · Mobile nationwide", href: "https://www.google.com/maps/search/?api=1&query=Morocco" },
 ];
 
 const inputClass =
@@ -74,7 +74,7 @@ const ContactSection = () => {
                             Let&apos;s <span className="gradient-text">work together</span>
                         </h2>
                         <p className="mt-4 max-w-xl mx-auto text-muted-foreground text-sm md:text-base">
-                            Have a project, an opportunity, or just want to say hi? My inbox is always open.
+                            Available to discuss an opportunity in Supply Chain / Logistics.
                         </p>
                     </div>
 
@@ -108,7 +108,7 @@ const ContactSection = () => {
 
                             <div className="mt-7 flex items-center gap-2 rounded-xl bg-primary/5 px-4 py-3 text-xs text-muted-foreground">
                                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-                                Available for internships &amp; freelance security work
+                                Available immediately for Supply Chain &amp; Logistics roles
                             </div>
                         </div>
 

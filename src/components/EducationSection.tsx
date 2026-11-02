@@ -3,25 +3,17 @@ import { GraduationCap, CalendarDays } from "lucide-react";
 
 const education = [
     {
-        school: "Faculté des Sciences et Techniques Gueliz - Marrakech",
-        degree: "Engineering Degree - IT Security (Sécurité d'Information Technologique)",
-        period: "2024 - 2027",
-        tags: ["Ethical Hacking & Security Testing", "Cryptography & Network Security", "Cloud Security & DevOps", "Cyber Incident Management & Digital Forensics", "Network and system security", "Mobile programming", "Java programming and security", "IT security and cyber law", "Back-end & front-end web development", "Project and Business Management", "Application and service security", "Cloud security and blockchain", "IT project management and agile methodologies", "Systems and Network Administration", "Security of banking payment systems and industrial information systems"],
-        logo: "/fst_marrakech_logo.png",
-        link: "https://www.fstg-marrakech.ac.ma/",
+        school: "ENCG Marrakech",
+        degree: "Master en Management Logistique",
+        period: "2021 - 2026",
+        tags: ["Supply Chain", "Gestion des flux physiques", "Gestion des stocks", "Transport & planification", "Pilotage de la performance", "Business Intelligence"],
+        logo: "/encg_marrakech_logo.png",
+        link: "#",
     },
     {
-        school: "FSTE - Errachidia",
-        degree: "DEUST - Math, Computer Science & Physics",
-        period: "2022 - 2024",
-        tags: ["Programming & Databases"],
-        logo: "/fst_errachidia_logo.png",
-        link: "https://fst-maroc.com/school/6",
-    },
-    {
-        school: "Lycée Abi El Kacem",
-        degree: "Baccalauréat - Physical Sciences (Mention Bien)",
-        period: "2021 - 2022",
+        school: "Baccalauréat",
+        degree: "Sciences de Gestion Comptable (Mention Très Bien)",
+        period: "",
         tags: [],
         logo: "/high_school_logo.png",
         link: "#",
@@ -37,7 +29,7 @@ const EducationSection = () => {
                         Academic <span className="gradient-text">background</span>
                     </h2>
                     <p className="mx-auto mt-4 max-w-xl text-sm text-muted-foreground md:text-base">
-                        My academic path toward cybersecurity engineering.
+                        An academic path built around logistics management and business administration.
                     </p>
                 </FadeIn>
 

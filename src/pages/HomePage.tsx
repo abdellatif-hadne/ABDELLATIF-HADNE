@@ -1,7 +1,6 @@
 import Navbar from "../components/Navbar";
 import Reveal from "../components/Reveal";
 import HeroSection from "../components/HeroSection";
-import BlogSection from "../components/BlogSection";
 import AboutSection from "../components/AboutSection";
 import SkillsSection from "../components/SkillsSection";
 import ExperienceSection from "../components/ExperienceSection";
@@ -28,7 +27,6 @@ const HomePage = () => {
                 <Reveal><ExperienceSection /></Reveal>
                 <Reveal><EducationSection /></Reveal>
                 <Reveal><ProjectsSection /></Reveal>
-                <Reveal><BlogSection /></Reveal>
                 <Reveal><CVSection /></Reveal>
                 <Reveal><CertsSection /></Reveal>
                 <Reveal><ContactSection /></Reveal>
@@ -37,7 +35,7 @@ const HomePage = () => {
             <Terminal />
 
             {/* <footer className="py-10 text-center text-muted-foreground text-xs font-mono relative z-10 border-t border-border/50">
-                <p>&copy; {new Date().getFullYear()} 0xRizki. All systems nominal.</p>
+                <p>&copy; {new Date().getFullYear()} Abdellatif Hadne. All rights reserved.</p>
             </footer> */}
         </div>
     );

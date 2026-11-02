@@ -12,9 +12,9 @@ const BlogPostPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    if (post) document.title = `${post.title} | Abdelhadi Rizki`;
+    if (post) document.title = `${post.title} | Abdellatif Hadne`;
     return () => {
-      document.title = "Rizki | Cybersecurity Engineer";
+      document.title = "Hadne | Supply Chain & Logistics";
     };
   }, [post]);
 

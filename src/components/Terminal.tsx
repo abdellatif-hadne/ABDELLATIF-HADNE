@@ -42,7 +42,7 @@ const Ext = ({ href, children }: { href: string; children: React.ReactNode }) =>
 
 const Banner = () => (
   <div className="space-y-1">
-    <p className="text-emerald-500 font-bold">0xRizki Secure Shell [Version 2.0.0]</p>
+    <p className="text-emerald-500 font-bold">A.Hadne Logistics Shell [Version 2.0.0]</p>
     <p className="text-muted-foreground text-xs">
       {identity.name} - {identity.role} - {identity.location}
     </p>
@@ -94,20 +94,20 @@ const Terminal = () => {
   const helpEntries: [string, string][] = [
     ["help", "Display this help menu"],
     ["whoami", "Identity, focus and current status"],
-    ["skills [blue|red|ai]", "Security & dev toolset by domain"],
-    ["projects [name]", "Security / AI projects with repo links"],
+    ["skills [tech|ops|soft]", "Tools & skills by domain"],
+    ["projects [name]", "Supply Chain & BI projects"],
     ["experience", "Professional experience timeline"],
-    ["volunteering", "Communities: DCG, n8n, GDG"],
+    ["volunteering", "Activities & engagements"],
     ["education", "Academic background"],
-    ["certs", "Certifications and issuers"],
-    ["awards", "CTF results, prizes and recognitions"],
+    ["certs", "Languages"],
+    ["awards", "Highlights & distinctions"],
     ["blog", "Latest write-ups"],
     ["contact", "Email, phone, location"],
-    ["social", "GitHub, LinkedIn, X, DCG"],
+    ["social", "LinkedIn"],
     ["stats", "Portfolio numbers at a glance"],
     ["neofetch", "System card"],
     ["goto <section>", "Scroll the page to a section"],
-    ["hack", "Run a pentest simulation"],
+    ["hack", "Run a supply chain simulation"],
     ["banner", "Reprint the welcome banner"],
     ["clear", "Clear screen buffer"],
     ["exit", "Close the terminal"],
@@ -154,7 +154,7 @@ const Terminal = () => {
         : skillGroups;
 
       if (groups.length === 0) {
-        return `Unknown category "${filter}". Try: skills blue | skills red | skills ai`;
+        return `Unknown category "${filter}". Try: skills tech | skills ops | skills soft`;
       }
 
       return (
@@ -169,7 +169,7 @@ const Terminal = () => {
           ))}
           {!filter && (
             <p className="text-muted-foreground/70">
-              {totalSkills} entries. Narrow with: skills blue | skills red | skills ai
+              {totalSkills} entries. Narrow with: skills tech | skills ops | skills soft
             </p>
           )}
         </div>
@@ -252,7 +252,7 @@ const Terminal = () => {
           </p>
         ))}
         <p className="text-muted-foreground/70 pt-1">
-          {certifications.length} certifications - run "goto certs" for the full list.
+          {certifications.length} languages - run "goto certs" for the full list.
         </p>
       </div>
     ),
@@ -306,11 +306,11 @@ const Terminal = () => {
 
     stats: () => (
       <div className="space-y-1 text-xs">
-        <Row label="projects">{projects.length} public repositories</Row>
+        <Row label="projects">{projects.length} projects</Row>
         <Row label="skills">{totalSkills} tools & techniques across {skillGroups.length} domains</Row>
         <Row label="experience">{experience.length} roles ({volunteering.length} communities)</Row>
-        <Row label="certs">{certifications.length} certifications</Row>
-        <Row label="awards">{achievements.length} results & recognitions</Row>
+        <Row label="languages">{certifications.length} languages</Row>
+        <Row label="highlights">{achievements.length} highlights</Row>
         <Row label="posts">{posts.length} write-ups published</Row>
       </div>
     ),
@@ -328,16 +328,16 @@ const Terminal = () => {
    \\/`}
         </div>
         <div className="space-y-0.5">
-          <p className="font-bold text-primary">rizki@0xrizki-secure-node</p>
+          <p className="font-bold text-primary">hadne@supply-chain-node</p>
           <p>-------------------------</p>
           <p><span className="font-semibold text-emerald-500">User:</span> {identity.name}</p>
           <p><span className="font-semibold text-emerald-500">Role:</span> {identity.role}</p>
           <p><span className="font-semibold text-emerald-500">Base:</span> {identity.location}</p>
-          <p><span className="font-semibold text-emerald-500">Stack:</span> Wazuh · MISP · TheHive · Python · PyTorch</p>
+          <p><span className="font-semibold text-emerald-500">Stack:</span> Power BI · Power Query · Excel · SQL · SAP · Odoo</p>
           <p><span className="font-semibold text-emerald-500">Skills:</span> {totalSkills} tracked</p>
-          <p><span className="font-semibold text-emerald-500">Repos:</span> {projects.length} public</p>
-          <p><span className="font-semibold text-emerald-500">Certs:</span> {certifications.length} verified</p>
-          <p><span className="font-semibold text-emerald-500">Shell:</span> 0xRizki secure shell v2.0.0</p>
+          <p><span className="font-semibold text-emerald-500">Projects:</span> {projects.length}</p>
+          <p><span className="font-semibold text-emerald-500">Languages:</span> {certifications.length}</p>
+          <p><span className="font-semibold text-emerald-500">Shell:</span> A.Hadne logistics shell v2.0.0</p>
         </div>
       </div>
     ),
@@ -356,15 +356,14 @@ const Terminal = () => {
 
     hack: () => (
       <div className="space-y-1 font-mono text-xs text-rose-500">
-        <p>[+] Initializing penetration test sequence...</p>
-        <p>[+] Scanning network segment 192.168.1.0/24 (nmap -sV)...</p>
-        <p>[+] Target found: 192.168.1.45 - 80/http, 22/ssh open</p>
-        <p>[+] Fuzzing web parameters with Burp Suite Intruder...</p>
-        <p>[+] SQL injection confirmed on /login?user=</p>
-        <p>[+] Dumping credentials, cracking hashes with hashcat...</p>
-        <p>[+] Privilege escalation via misconfigured SUID binary...</p>
-        <p className="mt-1 font-bold text-emerald-500">[!] ROOT ACCESS GAINED - findings logged to report.md</p>
-        <p className="text-muted-foreground/60">(simulation only - authorized testing mindset)</p>
+        <p>[+] Loading stock & transport data (Power Query)...</p>
+        <p>[+] Mapping logistics flows: approvisionnement → stock → expédition</p>
+        <p>[+] Checking stock reliability against last inventory...</p>
+        <p>[+] Planning delivery routes and fleet availability...</p>
+        <p>[+] Computing Supply Chain KPIs (OTD, taux de service, rotation)...</p>
+        <p>[+] Refreshing Power BI Control Tower dashboard...</p>
+        <p className="mt-1 font-bold text-emerald-500">[!] FLOWS SYNCHRONIZED - report sent to all services</p>
+        <p className="text-muted-foreground/60">(simulation only)</p>
       </div>
     ),
 
@@ -508,7 +507,7 @@ const Terminal = () => {
                 <span className="h-3 w-3 rounded-full bg-amber-500/80" />
                 <span className="h-3 w-3 rounded-full bg-emerald-500/80" />
                 <span className="ml-2 font-mono text-[10px] tracking-widest text-muted-foreground uppercase">
-                  secure-node@rizki: ~
+                  supply-chain@hadne: ~
                 </span>
               </div>
               <div className="flex items-center gap-3">
