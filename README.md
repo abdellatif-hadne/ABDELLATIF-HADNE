@@ -64,16 +64,6 @@ Morocco | **Available immediately** | **Mobile across Morocco**
 
 ---
 
-## Field Experience
-
-> Four missions, one goal: make the Supply Chain measurable and better.
-
-- **[Mission 1 – Company / Role]**: [one line: what you did + result]
-- **[Mission 2 – Company / Role]**: [one line: what you did + result]
-- **[Mission 3 – Company / Role]**: [one line: what you did + result]
-- **[Mission 4 – Company / Role]**: [one line: what you did + result]
-
----
 
 ## Featured Projects
 
